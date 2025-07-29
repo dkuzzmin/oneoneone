@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Лабиринт</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        
+        #gameCanvas {
+            display: block;
+            margin: 0 auto;
+            border: 2px solid #fff;
+            border-radius: 10px;
+        }
+        
+        #ui {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 18px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            z-index: 100;
+        }
+        
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            text-align: center;
+            font-size: 14px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        #winMessage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,255,0,0.9);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            font-size: 24px;
+            text-align: center;
+            display: none;
+            z-index: 200;
+        }
+    </style>
+</head>
+<body>
+    <div id="ui">
+        <div>Собрано кристаллов: <span id="score">0</span>/5</div>
+        <div>Время: <span id="time">0</span>с</div>
+    </div>
+    
+    <div id="controls">
+        Управление: WASD или стрелки для движения | Мышь для поворота камеры
+    </div>
+    
+    <div id="winMessage">
+        <h2>🎉 Поздравляем! 🎉</h2>
+        <p>Вы собрали все кристаллы!</p>
+        <p>Время: <span id="finalTime"></span>с</p>
+        <button onclick="restartGame()">Играть снова</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Глобальные переменные
+        let scene, camera, renderer, player, crystals = [], walls = [];
+        let moveState = { forward: false, backward: false, left: false, right: false };
+        let score = 0;
+        let startTime = Date.now();
+        let gameWon = false;
+        
+        // Настройка сцены
+        function initGame() {
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x87CEEB);
+            
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            document.body.appendChild(renderer.domElement);
+            
+            // Освещение
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.4);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(10, 20, 5);
+            directionalLight.castShadow = true;
+            directionalLight.shadow.mapSize.width = 2048;
+            directionalLight.shadow.mapSize.height = 2048;
+            scene.add(directionalLight);
+            
+            // Создание лабиринта
+            createMaze();
+            createPlayer();
+            createCrystals();
+            
+            // Обработчики событий
+            setupControls();
+            
+            // Запуск игрового цикла
+            animate();
+        }
+        
+        function createMaze() {
+            // Пол
+            const floorGeometry = new THREE.PlaneGeometry(50, 50);
+            const floorMaterial = new THREE.MeshLambertMaterial({ color: 0x90EE90 });
+            const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+            floor.rotation.x = -Math.PI / 2;
+            floor.receiveShadow = true;
+            scene.add(floor);
+            
+            // Стены лабиринта
+            const wallPositions = [
+                // Внешние стены
+                [-25, 0], [25, 0], [0, -25], [0, 25],
+                // Внутренние стены
+                [-15, -10], [-15, 10], [15, -10], [15, 10],
+                [-5, -15], [-5, 15], [5, -15], [5, 15],
+                [-10, 0], [10, 0], [0, -10], [0, 10]
+            ];
+            
+            wallPositions.forEach(pos => {
+                createWall(pos[0], pos[1]);
+            });
+        }
+        
+        function createWall(x, z) {
+            const wallGeometry = new THREE.BoxGeometry(2, 4, 2);
+            const wallMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
+            const wall = new THREE.Mesh(wallGeometry, wallMaterial);
+            wall.position.set(x, 2, z);
+            wall.castShadow = true;
+            wall.receiveShadow = true;
+            walls.push(wall);
+            scene.add(wall);
+        }
+        
+        function createPlayer() {
+            const playerGeometry = new THREE.BoxGeometry(1, 1, 1);
+            const playerMaterial = new THREE.MeshLambertMaterial({ color: 0x4169E1 });
+            player = new THREE.Mesh(playerGeometry, playerMaterial);
+            player.position.set(-20, 0.5, -20);
+            player.castShadow = true;
+            scene.add(player);
+            
+            // Камера следует за игроком
+            camera.position.set(-20, 5, -15);
+            camera.lookAt(player.position);
+        }
+        
+        function createCrystals() {
+            const crystalPositions = [
+                [18, 18], [-18, 18], [18, -18], [-18, -18], [0, 0]
+            ];
+            
+            crystalPositions.forEach(pos => {
+                const crystalGeometry = new THREE.OctahedronGeometry(0.8);
+                const crystalMaterial = new THREE.MeshLambertMaterial({ 
+                    color: 0xFF69B4,
+                    transparent: true,
+                    opacity: 0.8
+                });
+                const crystal = new THREE.Mesh(crystalGeometry, crystalMaterial);
+                crystal.position.set(pos[0], 1.5, pos[1]);
+                crystal.castShadow = true;
+                crystals.push(crystal);
+                scene.add(crystal);
+            });
+        }
+        
+        function setupControls() {
+            document.addEventListener('keydown', (event) => {
+                switch(event.code) {
+                    case 'KeyW':
+                    case 'ArrowUp':
+                        moveState.forward = true;
+                        break;
+                    case 'KeyS':
+                    case 'ArrowDown':
+                        moveState.backward = true;
+                        break;
+                    case 'KeyA':
+                    case 'ArrowLeft':
+                        moveState.left = true;
+                        break;
+                    case 'KeyD':
+                    case 'ArrowRight':
+                        moveState.right = true;
+                        break;
+                }
+            });
+            
+            document.addEventListener('keyup', (event) => {
+                switch(event.code) {
+                    case 'KeyW':
+                    case 'ArrowUp':
+                        moveState.forward = false;
+                        break;
+                    case 'KeyS':
+                    case 'ArrowDown':
+                        moveState.backward = false;
+                        break;
+                    case 'KeyA':
+                    case 'ArrowLeft':
+                        moveState.left = false;
+                        break;
+                    case 'KeyD':
+                    case 'ArrowRight':
+                        moveState.right = false;
+                        break;
+                }
+            });
+            
+            // Управление мышью для поворота камеры
+            let mouseX = 0, mouseY = 0;
+            let isMouseDown = false;
+            
+            document.addEventListener('mousedown', () => isMouseDown = true);
+            document.addEventListener('mouseup', () => isMouseDown = false);
+            document.addEventListener('mousemove', (event) => {
+                if (isMouseDown) {
+                    mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+                    mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+                }
+            });
+        }
+        
+        function updatePlayer() {
+            if (gameWon) return;
+            
+            const speed = 0.15;
+            const newPosition = player.position.clone();
+            
+            if (moveState.forward) newPosition.z -= speed;
+            if (moveState.backward) newPosition.z += speed;
+            if (moveState.left) newPosition.x -= speed;
+            if (moveState.right) newPosition.x += speed;
+            
+            // Проверка коллизий со стенами
+            let collision = false;
+            walls.forEach(wall => {
+                const distance = newPosition.distanceTo(wall.position);
+                if (distance < 2) {
+                    collision = true;
+                }
+            });
+            
+            // Границы карты
+            if (newPosition.x > 24 || newPosition.x < -24 || 
+                newPosition.z > 24 || newPosition.z < -24) {
+                collision = true;
+            }
+            
+            if (!collision) {
+                player.position.copy(newPosition);
+                
+                // Обновление позиции камеры
+                camera.position.x = player.position.x;
+                camera.position.z = player.position.z + 5;
+                camera.lookAt(player.position);
+            }
+            
+            // Вращение игрока
+            player.rotation.y += 0.02;
+        }
+        
+        function checkCrystalCollection() {
+            crystals.forEach((crystal, index) => {
+                if (crystal.visible) {
+                    const distance = player.position.distanceTo(crystal.position);
+                    if (distance < 2) {
+                        crystal.visible = false;
+                        score++;
+                        document.getElementById('score').textContent = score;
+                        
+                        if (score >= 5) {
+                            winGame();
+                        }
+                    }
+                }
+            });
+        }
+        
+        function updateCrystals() {
+            crystals.forEach(crystal => {
+                if (crystal.visible) {
+                    crystal.rotation.y += 0.05;
+                    crystal.position.y = 1.5 + Math.sin(Date.now() * 0.002) * 0.3;
+                }
+            });
+        }
+        
+        function updateUI() {
+            if (!gameWon) {
+                const currentTime = Math.floor((Date.now() - startTime) / 1000);
+                document.getElementById('time').textContent = currentTime;
+            }
+        }
+        
+        function winGame() {
+            gameWon = true;
+            const finalTime = Math.floor((Date.now() - startTime) / 1000);
+            document.getElementById('finalTime').textContent = finalTime;
+            document.getElementById('winMessage').style.display = 'block';
+        }
+        
+        function restartGame() {
+            // Сброс игры
+            score = 0;
+            gameWon = false;
+            startTime = Date.now();
+            
+            document.getElementById('score').textContent = '0';
+            document.getElementById('time').textContent = '0';
+            document.getElementById('winMessage').style.display = 'none';
+            
+            // Возврат игрока в начальную позицию
+            player.position.set(-20, 0.5, -20);
+            camera.position.set(-20, 5, -15);
+            
+            // Показать все кристаллы снова
+            crystals.forEach(crystal => {
+                crystal.visible = true;
+            });
+        }
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            updatePlayer();
+            checkCrystalCollection();
+            updateCrystals();
+            updateUI();
+            
+            renderer.render(scene, camera);
+        }
+        
+        // Обработчик изменения размера окна
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Запуск игры
+        initGame();
+    </script>
+</body>
+</html>
