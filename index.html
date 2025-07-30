@@ -331,13 +331,94 @@
         }
         
         function createPlayer() {
-            const playerGeometry = new THREE.BoxGeometry(1, 1, 1);
-            const playerMaterial = new THREE.MeshLambertMaterial({ 
-                color: selectedAvatar !== null ? avatars[selectedAvatar].color : 0x4169E1 
-            });
-            player = new THREE.Mesh(playerGeometry, playerMaterial);
-            player.position.set(-20, 0.5, -20);
+            // Create different player models based on selected avatar
+            let playerGeometry;
+            let playerMaterial;
+            
+            switch(selectedAvatar) {
+                case 0: // Lone Wolf 🐺 - Sharp angular shape
+                    playerGeometry = new THREE.ConeGeometry(0.6, 2, 8);
+                    playerMaterial = new THREE.MeshLambertMaterial({ color: 0x2c3e50 });
+                    break;
+                    
+                case 1: // Adventure Seeker 🎒 - Backpack-like shape
+                    const backpackGroup = new THREE.Group();
+                    // Main body
+                    const bodyGeometry = new THREE.BoxGeometry(0.8, 1.2, 0.6);
+                    const bodyMaterial = new THREE.MeshLambertMaterial({ color: 0xe67e22 });
+                    const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+                    backpackGroup.add(body);
+                    // Backpack
+                    const packGeometry = new THREE.BoxGeometry(0.6, 0.8, 0.3);
+                    const packMaterial = new THREE.MeshLambertMaterial({ color: 0xd35400 });
+                    const pack = new THREE.Mesh(packGeometry, packMaterial);
+                    pack.position.z = -0.45;
+                    pack.position.y = 0.2;
+                    backpackGroup.add(pack);
+                    player = backpackGroup;
+                    break;
+                    
+                case 2: // Strategist ⚔️ - Sword-like tall shape
+                    playerGeometry = new THREE.CylinderGeometry(0.3, 0.3, 2.5, 8);
+                    playerMaterial = new THREE.MeshLambertMaterial({ color: 0x8e44ad });
+                    break;
+                    
+                case 3: // Wise Keeper 🧙‍♂️ - Wizard hat shape
+                    const wizardGroup = new THREE.Group();
+                    // Base (robe)
+                    const robeGeometry = new THREE.CylinderGeometry(0.8, 0.4, 1.5, 8);
+                    const robeMaterial = new THREE.MeshLambertMaterial({ color: 0x27ae60 });
+                    const robe = new THREE.Mesh(robeGeometry, robeMaterial);
+                    wizardGroup.add(robe);
+                    // Hat
+                    const hatGeometry = new THREE.ConeGeometry(0.5, 1.2, 8);
+                    const hatMaterial = new THREE.MeshLambertMaterial({ color: 0x1e8449 });
+                    const hat = new THREE.Mesh(hatGeometry, hatMaterial);
+                    hat.position.y = 1.35;
+                    wizardGroup.add(hat);
+                    player = wizardGroup;
+                    break;
+                    
+                case 4: // Cheerful Creator 🎨 - Artistic palette shape
+                    const artistGroup = new THREE.Group();
+                    // Main body
+                    const artistBodyGeometry = new THREE.SphereGeometry(0.6, 8, 6);
+                    const artistBodyMaterial = new THREE.MeshLambertMaterial({ color: 0xe74c3c });
+                    const artistBody = new THREE.Mesh(artistBodyGeometry, artistBodyMaterial);
+                    artistGroup.add(artistBody);
+                    // Palette attachment
+                    const paletteGeometry = new THREE.BoxGeometry(0.4, 0.4, 0.1);
+                    const paletteMaterial = new THREE.MeshLambertMaterial({ color: 0xf39c12 });
+                    const palette = new THREE.Mesh(paletteGeometry, paletteMaterial);
+                    palette.position.x = 0.7;
+                    palette.position.y = 0.2;
+                    artistGroup.add(palette);
+                    player = artistGroup;
+                    break;
+                    
+                default:
+                    playerGeometry = new THREE.BoxGeometry(1, 1, 1);
+                    playerMaterial = new THREE.MeshLambertMaterial({ color: 0x4169E1 });
+                    break;
+            }
+            
+            // If not a group, create mesh from geometry
+            if (!player) {
+                player = new THREE.Mesh(playerGeometry, playerMaterial);
+            }
+            
+            player.position.set(-20, 1, -20);
             player.castShadow = true;
+            
+            // Make sure all children cast shadows for grouped objects
+            if (player.isGroup) {
+                player.traverse((child) => {
+                    if (child.isMesh) {
+                        child.castShadow = true;
+                    }
+                });
+            }
+            
             scene.add(player);
             
             // Camera follows player
@@ -457,8 +538,37 @@
                 camera.lookAt(player.position);
             }
             
-            // Player rotation
-            player.rotation.y += 0.02;
+            // Player rotation - different for different avatars
+            switch(selectedAvatar) {
+                case 0: // Lone Wolf - subtle rotation
+                    player.rotation.y += 0.01;
+                    break;
+                case 1: // Adventure Seeker - bouncy movement
+                    player.rotation.y += 0.02;
+                    if (player.children.length > 0) {
+                        player.children[1].rotation.z = Math.sin(Date.now() * 0.005) * 0.1; // Backpack sway
+                    }
+                    break;
+                case 2: // Strategist - steady rotation
+                    player.rotation.y += 0.015;
+                    break;
+                case 3: // Wise Keeper - mystical float
+                    player.rotation.y += 0.008;
+                    player.position.y = 1 + Math.sin(Date.now() * 0.003) * 0.1;
+                    if (player.children.length > 1) {
+                        player.children[1].rotation.y += 0.03; // Hat rotation
+                    }
+                    break;
+                case 4: // Cheerful Creator - artistic spin
+                    player.rotation.y += 0.025;
+                    if (player.children.length > 1) {
+                        player.children[1].rotation.z = Math.sin(Date.now() * 0.004) * 0.2; // Palette wave
+                    }
+                    break;
+                default:
+                    player.rotation.y += 0.02;
+                    break;
+            }
         }
         
         function checkCrystalCollection() {
