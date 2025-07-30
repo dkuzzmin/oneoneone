@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Лабиринт</title>
+    <title>3D Crystal Maze</title>
     <style>
         body {
             margin: 0;
@@ -55,35 +55,212 @@
             display: none;
             z-index: 200;
         }
+        
+        #avatarSelection {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        #avatarSelection h1 {
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .avatar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            padding: 20px;
+        }
+        
+        .avatar-card {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            color: white;
+            text-align: center;
+        }
+        
+        .avatar-card:hover {
+            border-color: #3498db;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(52,152,219,0.3);
+        }
+        
+        .avatar-card.selected {
+            border-color: #e74c3c;
+            background: rgba(231,76,60,0.2);
+        }
+        
+        .avatar-emoji {
+            font-size: 4em;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .avatar-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .avatar-description {
+            font-size: 0.9em;
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+        
+        .start-button {
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        
+        .start-button.enabled {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .start-button:hover.enabled {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231,76,60,0.4);
+        }
     </style>
 </head>
 <body>
-    <div id="ui">
-        <div>Собрано кристаллов: <span id="score">0</span>/5</div>
-        <div>Время: <span id="time">0</span>с</div>
+    <div id="avatarSelection">
+        <h1>Choose Your Character</h1>
+        <div class="avatar-grid">
+            <div class="avatar-card" data-avatar="0">
+                <span class="avatar-emoji">🐺</span>
+                <div class="avatar-name">Lone Wolf</div>
+                <div class="avatar-description">Dark cloak, hidden face, cold gaze</div>
+            </div>
+            <div class="avatar-card" data-avatar="1">
+                <span class="avatar-emoji">🎒</span>
+                <div class="avatar-name">Adventure Seeker</div>
+                <div class="avatar-description">Bright jacket, backpack, compass on belt</div>
+            </div>
+            <div class="avatar-card" data-avatar="2">
+                <span class="avatar-emoji">⚔️</span>
+                <div class="avatar-name">Strategist</div>
+                <div class="avatar-description">Strict suit or armor, holds map or scroll</div>
+            </div>
+            <div class="avatar-card" data-avatar="3">
+                <span class="avatar-emoji">🧙‍♂️</span>
+                <div class="avatar-name">Wise Keeper</div>
+                <div class="avatar-description">Gray hair, long robe, staff or book</div>
+            </div>
+            <div class="avatar-card" data-avatar="4">
+                <span class="avatar-emoji">🎨</span>
+                <div class="avatar-name">Cheerful Creator</div>
+                <div class="avatar-description">Colorful clothes, brushes, musical instrument</div>
+            </div>
+        </div>
+        <button class="start-button" id="startButton" onclick="startGame()">Start Game</button>
+    </div>
+
+    <div id="ui" style="display: none;">
+        <div>Crystals Collected: <span id="score">0</span>/5</div>
+        <div>Time: <span id="time">0</span>s</div>
+        <div>Character: <span id="currentAvatar"></span></div>
     </div>
     
-    <div id="controls">
-        Управление: WASD или стрелки для движения | Мышь для поворота камеры
+    <div id="controls" style="display: none;">
+        Controls: WASD or Arrow Keys to move | Mouse to rotate camera
     </div>
     
     <div id="winMessage">
-        <h2>🎉 Поздравляем! 🎉</h2>
-        <p>Вы собрали все кристаллы!</p>
-        <p>Время: <span id="finalTime"></span>с</p>
-        <button onclick="restartGame()">Играть снова</button>
+        <h2>🎉 Congratulations! 🎉</h2>
+        <p>You collected all crystals!</p>
+        <p>Time: <span id="finalTime"></span>s</p>
+        <button onclick="restartGame()">Play Again</button>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-        // Глобальные переменные
+        // Global variables
         let scene, camera, renderer, player, crystals = [], walls = [];
         let moveState = { forward: false, backward: false, left: false, right: false };
         let score = 0;
         let startTime = Date.now();
         let gameWon = false;
+        let selectedAvatar = null;
+        let gameStarted = false;
         
-        // Настройка сцены
+        // Avatar data
+        const avatars = [
+            { name: "Lone Wolf", color: 0x2c3e50, emoji: "🐺" },
+            { name: "Adventure Seeker", color: 0xe67e22, emoji: "🎒" },
+            { name: "Strategist", color: 0x8e44ad, emoji: "⚔️" },
+            { name: "Wise Keeper", color: 0x27ae60, emoji: "🧙‍♂️" },
+            { name: "Cheerful Creator", color: 0xe74c3c, emoji: "🎨" }
+        ];
+        
+        // Avatar selection handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const avatarCards = document.querySelectorAll('.avatar-card');
+            const startButton = document.getElementById('startButton');
+            
+            avatarCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove selection from other cards
+                    avatarCards.forEach(c => c.classList.remove('selected'));
+                    
+                    // Select clicked card
+                    this.classList.add('selected');
+                    
+                    // Save selected avatar
+                    selectedAvatar = parseInt(this.dataset.avatar);
+                    
+                    // Enable start button
+                    startButton.classList.add('enabled');
+                });
+            });
+        });
+        
+        function startGame() {
+            if (selectedAvatar === null) return;
+            
+            // Hide avatar selection screen
+            document.getElementById('avatarSelection').style.display = 'none';
+            
+            // Show game interface
+            document.getElementById('ui').style.display = 'block';
+            document.getElementById('controls').style.display = 'block';
+            
+            // Update character info
+            document.getElementById('currentAvatar').textContent = avatars[selectedAvatar].name + ' ' + avatars[selectedAvatar].emoji;
+            
+            gameStarted = true;
+            initGame();
+        }
+        
+        // Scene setup
         function initGame() {
             scene = new THREE.Scene();
             scene.background = new THREE.Color(0x87CEEB);
@@ -95,7 +272,7 @@
             renderer.shadowMap.type = THREE.PCFSoftShadowMap;
             document.body.appendChild(renderer.domElement);
             
-            // Освещение
+            // Lighting
             const ambientLight = new THREE.AmbientLight(0x404040, 0.4);
             scene.add(ambientLight);
             
@@ -106,20 +283,20 @@
             directionalLight.shadow.mapSize.height = 2048;
             scene.add(directionalLight);
             
-            // Создание лабиринта
+            // Create maze
             createMaze();
             createPlayer();
             createCrystals();
             
-            // Обработчики событий
+            // Event handlers
             setupControls();
             
-            // Запуск игрового цикла
+            // Start game loop
             animate();
         }
         
         function createMaze() {
-            // Пол
+            // Floor
             const floorGeometry = new THREE.PlaneGeometry(50, 50);
             const floorMaterial = new THREE.MeshLambertMaterial({ color: 0x90EE90 });
             const floor = new THREE.Mesh(floorGeometry, floorMaterial);
@@ -127,11 +304,11 @@
             floor.receiveShadow = true;
             scene.add(floor);
             
-            // Стены лабиринта
+            // Maze walls
             const wallPositions = [
-                // Внешние стены
+                // Outer walls
                 [-25, 0], [25, 0], [0, -25], [0, 25],
-                // Внутренние стены
+                // Inner walls
                 [-15, -10], [-15, 10], [15, -10], [15, 10],
                 [-5, -15], [-5, 15], [5, -15], [5, 15],
                 [-10, 0], [10, 0], [0, -10], [0, 10]
@@ -155,13 +332,15 @@
         
         function createPlayer() {
             const playerGeometry = new THREE.BoxGeometry(1, 1, 1);
-            const playerMaterial = new THREE.MeshLambertMaterial({ color: 0x4169E1 });
+            const playerMaterial = new THREE.MeshLambertMaterial({ 
+                color: selectedAvatar !== null ? avatars[selectedAvatar].color : 0x4169E1 
+            });
             player = new THREE.Mesh(playerGeometry, playerMaterial);
             player.position.set(-20, 0.5, -20);
             player.castShadow = true;
             scene.add(player);
             
-            // Камера следует за игроком
+            // Camera follows player
             camera.position.set(-20, 5, -15);
             camera.lookAt(player.position);
         }
@@ -229,7 +408,7 @@
                 }
             });
             
-            // Управление мышью для поворота камеры
+            // Mouse controls for camera rotation
             let mouseX = 0, mouseY = 0;
             let isMouseDown = false;
             
@@ -254,7 +433,7 @@
             if (moveState.left) newPosition.x -= speed;
             if (moveState.right) newPosition.x += speed;
             
-            // Проверка коллизий со стенами
+            // Wall collision detection
             let collision = false;
             walls.forEach(wall => {
                 const distance = newPosition.distanceTo(wall.position);
@@ -263,7 +442,7 @@
                 }
             });
             
-            // Границы карты
+            // Map boundaries
             if (newPosition.x > 24 || newPosition.x < -24 || 
                 newPosition.z > 24 || newPosition.z < -24) {
                 collision = true;
@@ -272,13 +451,13 @@
             if (!collision) {
                 player.position.copy(newPosition);
                 
-                // Обновление позиции камеры
+                // Update camera position
                 camera.position.x = player.position.x;
                 camera.position.z = player.position.z + 5;
                 camera.lookAt(player.position);
             }
             
-            // Вращение игрока
+            // Player rotation
             player.rotation.y += 0.02;
         }
         
@@ -323,7 +502,7 @@
         }
         
         function restartGame() {
-            // Сброс игры
+            // Reset game
             score = 0;
             gameWon = false;
             startTime = Date.now();
@@ -332,14 +511,30 @@
             document.getElementById('time').textContent = '0';
             document.getElementById('winMessage').style.display = 'none';
             
-            // Возврат игрока в начальную позицию
-            player.position.set(-20, 0.5, -20);
-            camera.position.set(-20, 5, -15);
+            // Show avatar selection screen again
+            document.getElementById('avatarSelection').style.display = 'flex';
+            document.getElementById('ui').style.display = 'none';
+            document.getElementById('controls').style.display = 'none';
             
-            // Показать все кристаллы снова
-            crystals.forEach(crystal => {
-                crystal.visible = true;
-            });
+            // Reset avatar selection
+            selectedAvatar = null;
+            gameStarted = false;
+            document.querySelectorAll('.avatar-card').forEach(c => c.classList.remove('selected'));
+            document.getElementById('startButton').classList.remove('enabled');
+            
+            // Clear scene if it exists
+            if (scene) {
+                while(scene.children.length > 0) {
+                    scene.remove(scene.children[0]);
+                }
+                if (renderer && renderer.domElement && renderer.domElement.parentNode) {
+                    renderer.domElement.parentNode.removeChild(renderer.domElement);
+                }
+            }
+            
+            // Reset arrays
+            crystals = [];
+            walls = [];
         }
         
         function animate() {
@@ -353,15 +548,17 @@
             renderer.render(scene, camera);
         }
         
-        // Обработчик изменения размера окна
+        // Window resize handler
         window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            if (camera && renderer) {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }
         });
         
-        // Запуск игры
-        initGame();
+        // Don't start game automatically - wait for avatar selection
+        // initGame(); - removed
     </script>
 </body>
 </html>
