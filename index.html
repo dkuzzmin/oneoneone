@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Crystal Maze</title>
+    <title>Office Document Quest</title>
     <style>
         body {
             margin: 0;
@@ -11,13 +11,6 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             font-family: Arial, sans-serif;
             overflow: hidden;
-        }
-        
-        #gameCanvas {
-            display: block;
-            margin: 0 auto;
-            border: 2px solid #fff;
-            border-radius: 10px;
         }
         
         #ui {
@@ -41,19 +34,24 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
         
-        #winMessage {
+        #gameOverMessage, #winMessage {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0,255,0,0.9);
+            background: rgba(0,0,0,0.9);
             color: white;
             padding: 30px;
             border-radius: 15px;
-            font-size: 24px;
+            font-size: 18px;
             text-align: center;
             display: none;
             z-index: 200;
+            max-width: 500px;
+        }
+        
+        #winMessage {
+            background: rgba(0,255,0,0.9);
         }
         
         #avatarSelection {
@@ -149,76 +147,191 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(231,76,60,0.4);
         }
+        
+        /* Puzzle Styles */
+        #puzzleScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1500;
+        }
+        
+        #puzzleScreen h1 {
+            color: white;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .puzzle-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 80px);
+            grid-template-rows: repeat(3, 80px);
+            gap: 4px;
+            margin: 20px 0;
+        }
+        
+        .puzzle-tile {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        .puzzle-tile:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+        }
+        
+        .puzzle-tile.empty {
+            background: transparent;
+            box-shadow: inset 0 0 10px rgba(255,255,255,0.2);
+        }
+        
+        #puzzleInfo {
+            color: white;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        #skipPuzzle {
+            padding: 10px 30px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        #skipPuzzle:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .results-section {
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+        
+        .result-title {
+            font-weight: bold;
+            color: #f39c12;
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 <body>
     <div id="avatarSelection">
-        <h1>Choose Your Character</h1>
+        <h1>Choose Your Office Worker</h1>
         <div class="avatar-grid">
             <div class="avatar-card" data-avatar="0">
                 <span class="avatar-emoji">🐺</span>
-                <div class="avatar-name">Lone Wolf</div>
-                <div class="avatar-description">Dark cloak, hidden face, cold gaze</div>
+                <div class="avatar-name">Night Shift Manager</div>
+                <div class="avatar-description">Works alone, prefers dark themes</div>
             </div>
             <div class="avatar-card" data-avatar="1">
                 <span class="avatar-emoji">🎒</span>
-                <div class="avatar-name">Adventure Seeker</div>
-                <div class="avatar-description">Bright jacket, backpack, compass on belt</div>
+                <div class="avatar-name">Field Sales Rep</div>
+                <div class="avatar-description">Always ready for business trips</div>
             </div>
             <div class="avatar-card" data-avatar="2">
                 <span class="avatar-emoji">⚔️</span>
-                <div class="avatar-name">Strategist</div>
-                <div class="avatar-description">Strict suit or armor, holds map or scroll</div>
+                <div class="avatar-name">Project Manager</div>
+                <div class="avatar-description">Strategic planner and team leader</div>
             </div>
             <div class="avatar-card" data-avatar="3">
                 <span class="avatar-emoji">🧙‍♂️</span>
-                <div class="avatar-name">Wise Keeper</div>
-                <div class="avatar-description">Gray hair, long robe, staff or book</div>
+                <div class="avatar-name">Senior Consultant</div>
+                <div class="avatar-description">Wise advisor with years of experience</div>
             </div>
             <div class="avatar-card" data-avatar="4">
                 <span class="avatar-emoji">🎨</span>
-                <div class="avatar-name">Cheerful Creator</div>
-                <div class="avatar-description">Colorful clothes, brushes, musical instrument</div>
+                <div class="avatar-name">Creative Director</div>
+                <div class="avatar-description">Brings color to corporate world</div>
             </div>
         </div>
-        <button class="start-button" id="startButton" onclick="startGame()">Start Game</button>
+        <button class="start-button" id="startButton" onclick="startPuzzle()">Continue to Puzzle</button>
+    </div>
+
+    <div id="puzzleScreen">
+        <h1>Office Skills Test</h1>
+        <p style="color: white; text-align: center; max-width: 400px;">
+            Solve this 3x3 sliding puzzle to prove your problem-solving skills!<br>
+            Arrange numbers 1-8 in order with the empty space at bottom-right.
+        </p>
+        <div class="puzzle-grid" id="puzzleGrid"></div>
+        <div id="puzzleInfo">
+            <div>Time: <span id="puzzleTime">0</span>s</div>
+            <div>Moves: <span id="puzzleMoves">0</span></div>
+        </div>
+        <button id="skipPuzzle" onclick="skipPuzzle()">Skip Puzzle</button>
     </div>
 
     <div id="ui" style="display: none;">
-        <div>Crystals Collected: <span id="score">0</span>/5</div>
-        <div>Time: <span id="time">0</span>s</div>
-        <div>Character: <span id="currentAvatar"></span></div>
+        <div>Documents Collected: <span id="score">0</span>/5</div>
+        <div>Time Remaining: <span id="timeLeft">30</span>s</div>
+        <div>Employee: <span id="currentAvatar"></span></div>
     </div>
     
     <div id="controls" style="display: none;">
-        Controls: WASD or Arrow Keys to move | Mouse to rotate camera
+        Controls: WASD or Arrow Keys to move | Collect all documents before time runs out!
     </div>
     
     <div id="winMessage">
-        <h2>🎉 Congratulations! 🎉</h2>
-        <p>You collected all crystals!</p>
-        <p>Time: <span id="finalTime"></span>s</p>
-        <button onclick="restartGame()">Play Again</button>
+        <h2>🎉 Mission Accomplished! 🎉</h2>
+        <div id="gameResults"></div>
+        <button onclick="restartGame()">New Game</button>
+    </div>
+    
+    <div id="gameOverMessage">
+        <h2>⏰ Time's Up! ⏰</h2>
+        <div id="gameOverResults"></div>
+        <button onclick="restartGame()">Try Again</button>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         // Global variables
-        let scene, camera, renderer, player, crystals = [], walls = [];
+        let scene, camera, renderer, player, documents = [], obstacles = [];
         let moveState = { forward: false, backward: false, left: false, right: false };
         let score = 0;
-        let startTime = Date.now();
+        let gameStartTime = Date.now();
         let gameWon = false;
+        let gameLost = false;
         let selectedAvatar = null;
         let gameStarted = false;
+        let timeLimit = 30; // 30 seconds
+        let timeLeft = timeLimit;
+        let gameTimer;
+        
+        // Puzzle variables
+        let puzzleStartTime = null;
+        let puzzleEndTime = null;
+        let puzzleSolved = false;
+        let puzzleMoves = 0;
+        let puzzleSkipped = false;
         
         // Avatar data
         const avatars = [
-            { name: "Lone Wolf", color: 0x2c3e50, emoji: "🐺" },
-            { name: "Adventure Seeker", color: 0xe67e22, emoji: "🎒" },
-            { name: "Strategist", color: 0x8e44ad, emoji: "⚔️" },
-            { name: "Wise Keeper", color: 0x27ae60, emoji: "🧙‍♂️" },
-            { name: "Cheerful Creator", color: 0xe74c3c, emoji: "🎨" }
+            { name: "Night Shift Manager", color: 0x2c3e50, emoji: "🐺" },
+            { name: "Field Sales Rep", color: 0xe67e22, emoji: "🎒" },
+            { name: "Project Manager", color: 0x8e44ad, emoji: "⚔️" },
+            { name: "Senior Consultant", color: 0x27ae60, emoji: "🧙‍♂️" },
+            { name: "Creative Director", color: 0xe74c3c, emoji: "🎨" }
         ];
         
         // Avatar selection handling
@@ -228,42 +341,175 @@
             
             avatarCards.forEach(card => {
                 card.addEventListener('click', function() {
-                    // Remove selection from other cards
                     avatarCards.forEach(c => c.classList.remove('selected'));
-                    
-                    // Select clicked card
                     this.classList.add('selected');
-                    
-                    // Save selected avatar
                     selectedAvatar = parseInt(this.dataset.avatar);
-                    
-                    // Enable start button
                     startButton.classList.add('enabled');
                 });
             });
         });
         
-        function startGame() {
+        // Puzzle Logic
+        let puzzleState = [1, 2, 3, 4, 5, 6, 7, 8, 0]; // 0 represents empty space
+        let solvedState = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+        
+        function startPuzzle() {
             if (selectedAvatar === null) return;
             
-            // Hide avatar selection screen
             document.getElementById('avatarSelection').style.display = 'none';
+            document.getElementById('puzzleScreen').style.display = 'flex';
             
-            // Show game interface
+            shufflePuzzle();
+            renderPuzzle();
+            puzzleStartTime = Date.now();
+            puzzleMoves = 0;
+            updatePuzzleInfo();
+        }
+        
+        function shufflePuzzle() {
+            // Simple shuffle that ensures solvability
+            for (let i = 0; i < 100; i++) {
+                const moves = getPossibleMoves();
+                const randomMove = moves[Math.floor(Math.random() * moves.length)];
+                moveTile(randomMove);
+            }
+            puzzleMoves = 0; // Reset moves after shuffling
+        }
+        
+        function renderPuzzle() {
+            const grid = document.getElementById('puzzleGrid');
+            grid.innerHTML = '';
+            
+            puzzleState.forEach((num, index) => {
+                const tile = document.createElement('button');
+                tile.className = 'puzzle-tile' + (num === 0 ? ' empty' : '');
+                tile.textContent = num === 0 ? '' : num;
+                tile.onclick = () => clickTile(index);
+                grid.appendChild(tile);
+            });
+        }
+        
+        function clickTile(index) {
+            const emptyIndex = puzzleState.indexOf(0);
+            const canMove = getPossibleMoves().includes(index);
+            
+            if (canMove) {
+                puzzleState[emptyIndex] = puzzleState[index];
+                puzzleState[index] = 0;
+                puzzleMoves++;
+                renderPuzzle();
+                updatePuzzleInfo();
+                
+                if (isPuzzleSolved()) {
+                    puzzleSolved = true;
+                    puzzleEndTime = Date.now();
+                    setTimeout(startMainGame, 500);
+                }
+            }
+        }
+        
+        function getPossibleMoves() {
+            const emptyIndex = puzzleState.indexOf(0);
+            const row = Math.floor(emptyIndex / 3);
+            const col = emptyIndex % 3;
+            const moves = [];
+            
+            if (row > 0) moves.push(emptyIndex - 3); // Up
+            if (row < 2) moves.push(emptyIndex + 3); // Down
+            if (col > 0) moves.push(emptyIndex - 1); // Left
+            if (col < 2) moves.push(emptyIndex + 1); // Right
+            
+            return moves;
+        }
+        
+        function moveTile(index) {
+            const emptyIndex = puzzleState.indexOf(0);
+            puzzleState[emptyIndex] = puzzleState[index];
+            puzzleState[index] = 0;
+        }
+        
+        function isPuzzleSolved() {
+            return JSON.stringify(puzzleState) === JSON.stringify(solvedState);
+        }
+        
+        function updatePuzzleInfo() {
+            if (puzzleStartTime) {
+                const elapsed = Math.floor((Date.now() - puzzleStartTime) / 1000);
+                document.getElementById('puzzleTime').textContent = elapsed;
+            }
+            document.getElementById('puzzleMoves').textContent = puzzleMoves;
+        }
+        
+        function skipPuzzle() {
+            puzzleSkipped = true;
+            puzzleEndTime = Date.now();
+            startMainGame();
+        }
+        
+        // Main Game
+        function startMainGame() {
+            document.getElementById('puzzleScreen').style.display = 'none';
             document.getElementById('ui').style.display = 'block';
             document.getElementById('controls').style.display = 'block';
             
-            // Update character info
             document.getElementById('currentAvatar').textContent = avatars[selectedAvatar].name + ' ' + avatars[selectedAvatar].emoji;
             
+            gameStartTime = Date.now();
+            timeLeft = timeLimit;
             gameStarted = true;
             initGame();
+            startGameTimer();
+        }
+        
+        function startGameTimer() {
+            gameTimer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timeLeft').textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    endGame(false);
+                }
+            }, 1000);
+        }
+        
+        function endGame(won) {
+            clearInterval(gameTimer);
+            gameWon = won;
+            gameLost = !won;
+            
+            const gameTime = Math.floor((Date.now() - gameStartTime) / 1000);
+            const puzzleTime = puzzleEndTime ? Math.floor((puzzleEndTime - puzzleStartTime) / 1000) : 0;
+            const completionPercentage = Math.round((score / 5) * 100);
+            
+            const results = `
+                <div class="results-section">
+                    <div class="result-title">Employee Profile:</div>
+                    <div>${avatars[selectedAvatar].name} ${avatars[selectedAvatar].emoji}</div>
+                </div>
+                <div class="results-section">
+                    <div class="result-title">Skills Test Results:</div>
+                    <div>${puzzleSkipped ? 'Skipped' : (puzzleSolved ? `Completed in ${puzzleTime}s (${puzzleMoves} moves)` : 'Not completed')}</div>
+                </div>
+                <div class="results-section">
+                    <div class="result-title">Document Collection:</div>
+                    <div>${score}/5 documents (${completionPercentage}%)</div>
+                    <div>Time used: ${gameTime}s / ${timeLimit}s</div>
+                </div>
+            `;
+            
+            if (won) {
+                document.getElementById('gameResults').innerHTML = results;
+                document.getElementById('winMessage').style.display = 'block';
+            } else {
+                document.getElementById('gameOverResults').innerHTML = results;
+                document.getElementById('gameOverMessage').style.display = 'block';
+            }
         }
         
         // Scene setup
         function initGame() {
             scene = new THREE.Scene();
-            scene.background = new THREE.Color(0x87CEEB);
+            scene.background = new THREE.Color(0xf5f5f5); // Office white/gray
             
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -272,128 +518,193 @@
             renderer.shadowMap.type = THREE.PCFSoftShadowMap;
             document.body.appendChild(renderer.domElement);
             
-            // Lighting
-            const ambientLight = new THREE.AmbientLight(0x404040, 0.4);
+            // Office lighting
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
             scene.add(ambientLight);
             
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-            directionalLight.position.set(10, 20, 5);
-            directionalLight.castShadow = true;
-            directionalLight.shadow.mapSize.width = 2048;
-            directionalLight.shadow.mapSize.height = 2048;
-            scene.add(directionalLight);
+            const officeLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            officeLight.position.set(10, 20, 5);
+            officeLight.castShadow = true;
+            officeLight.shadow.mapSize.width = 2048;
+            officeLight.shadow.mapSize.height = 2048;
+            scene.add(officeLight);
             
-            // Create maze
-            createMaze();
+            createOffice();
             createPlayer();
-            createCrystals();
-            
-            // Event handlers
+            createDocuments();
             setupControls();
-            
-            // Start game loop
             animate();
         }
         
-        function createMaze() {
-            // Floor
+        function createOffice() {
+            // Office floor
             const floorGeometry = new THREE.PlaneGeometry(50, 50);
-            const floorMaterial = new THREE.MeshLambertMaterial({ color: 0x90EE90 });
+            const floorMaterial = new THREE.MeshLambertMaterial({ color: 0xe8e8e8 });
             const floor = new THREE.Mesh(floorGeometry, floorMaterial);
             floor.rotation.x = -Math.PI / 2;
             floor.receiveShadow = true;
             scene.add(floor);
             
-            // Maze walls
-            const wallPositions = [
-                // Outer walls
-                [-25, 0], [25, 0], [0, -25], [0, 25],
-                // Inner walls
+            // Office desks positions
+            const deskPositions = [
+                [-20, 0], [20, 0], [0, -20], [0, 20],
                 [-15, -10], [-15, 10], [15, -10], [15, 10],
                 [-5, -15], [-5, 15], [5, -15], [5, 15],
                 [-10, 0], [10, 0], [0, -10], [0, 10]
             ];
             
-            wallPositions.forEach(pos => {
-                createWall(pos[0], pos[1]);
+            deskPositions.forEach(pos => {
+                createOfficeDesk(pos[0], pos[1]);
             });
+            
+            // Office signs
+            createOfficeSign(-22, 0, "HR DEPT");
+            createOfficeSign(22, 0, "IT DEPT");
+            createOfficeSign(0, -22, "SALES");
+            createOfficeSign(0, 22, "FINANCE");
         }
         
-        function createWall(x, z) {
-            const wallGeometry = new THREE.BoxGeometry(2, 4, 2);
-            const wallMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
-            const wall = new THREE.Mesh(wallGeometry, wallMaterial);
-            wall.position.set(x, 2, z);
-            wall.castShadow = true;
-            wall.receiveShadow = true;
-            walls.push(wall);
-            scene.add(wall);
+        function createOfficeDesk(x, z) {
+            const deskGroup = new THREE.Group();
+            
+            // Desk surface
+            const deskGeometry = new THREE.BoxGeometry(3, 0.2, 2);
+            const deskMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
+            const desk = new THREE.Mesh(deskGeometry, deskMaterial);
+            desk.position.y = 1.5;
+            deskGroup.add(desk);
+            
+            // Desk legs
+            for (let i = 0; i < 4; i++) {
+                const legGeometry = new THREE.BoxGeometry(0.1, 1.5, 0.1);
+                const legMaterial = new THREE.MeshLambertMaterial({ color: 0x696969 });
+                const leg = new THREE.Mesh(legGeometry, legMaterial);
+                leg.position.x = (i % 2) * 2.8 - 1.4;
+                leg.position.z = Math.floor(i / 2) * 1.8 - 0.9;
+                leg.position.y = 0.75;
+                deskGroup.add(leg);
+            }
+            
+            // Monitor
+            const monitorGeometry = new THREE.BoxGeometry(1.2, 0.8, 0.1);
+            const monitorMaterial = new THREE.MeshLambertMaterial({ color: 0x000000 });
+            const monitor = new THREE.Mesh(monitorGeometry, monitorMaterial);
+            monitor.position.y = 2.1;
+            monitor.position.z = -0.5;
+            deskGroup.add(monitor);
+            
+            // Keyboard
+            const keyboardGeometry = new THREE.BoxGeometry(0.8, 0.05, 0.3);
+            const keyboardMaterial = new THREE.MeshLambertMaterial({ color: 0x333333 });
+            const keyboard = new THREE.Mesh(keyboardGeometry, keyboardMaterial);
+            keyboard.position.y = 1.65;
+            keyboard.position.z = 0.3;
+            deskGroup.add(keyboard);
+            
+            deskGroup.position.set(x, 0, z);
+            deskGroup.castShadow = true;
+            deskGroup.receiveShadow = true;
+            
+            deskGroup.traverse((child) => {
+                if (child.isMesh) {
+                    child.castShadow = true;
+                    child.receiveShadow = true;
+                }
+            });
+            
+            obstacles.push(deskGroup);
+            scene.add(deskGroup);
+        }
+        
+        function createOfficeSign(x, z, text) {
+            const signGroup = new THREE.Group();
+            
+            // Sign post
+            const postGeometry = new THREE.CylinderGeometry(0.1, 0.1, 3);
+            const postMaterial = new THREE.MeshLambertMaterial({ color: 0x696969 });
+            const post = new THREE.Mesh(postGeometry, postMaterial);
+            post.position.y = 1.5;
+            signGroup.add(post);
+            
+            // Sign board
+            const boardGeometry = new THREE.BoxGeometry(3, 0.8, 0.1);
+            const boardMaterial = new THREE.MeshLambertMaterial({ color: 0x2980b9 });
+            const board = new THREE.Mesh(boardGeometry, boardMaterial);
+            board.position.y = 2.5;
+            signGroup.add(board);
+            
+            signGroup.position.set(x, 0, z);
+            signGroup.castShadow = true;
+            signGroup.receiveShadow = true;
+            
+            signGroup.traverse((child) => {
+                if (child.isMesh) {
+                    child.castShadow = true;
+                    child.receiveShadow = true;
+                }
+            });
+            
+            scene.add(signGroup);
         }
         
         function createPlayer() {
-            // Create different player models based on selected avatar
             let playerGeometry;
             let playerMaterial;
             
             switch(selectedAvatar) {
-                case 0: // Lone Wolf 🐺 - Sharp angular shape
+                case 0: // Night Shift Manager
                     playerGeometry = new THREE.ConeGeometry(0.6, 2, 8);
                     playerMaterial = new THREE.MeshLambertMaterial({ color: 0x2c3e50 });
                     break;
                     
-                case 1: // Adventure Seeker 🎒 - Backpack-like shape
-                    const backpackGroup = new THREE.Group();
-                    // Main body
+                case 1: // Field Sales Rep
+                    const salesGroup = new THREE.Group();
                     const bodyGeometry = new THREE.BoxGeometry(0.8, 1.2, 0.6);
                     const bodyMaterial = new THREE.MeshLambertMaterial({ color: 0xe67e22 });
                     const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
-                    backpackGroup.add(body);
-                    // Backpack
-                    const packGeometry = new THREE.BoxGeometry(0.6, 0.8, 0.3);
-                    const packMaterial = new THREE.MeshLambertMaterial({ color: 0xd35400 });
-                    const pack = new THREE.Mesh(packGeometry, packMaterial);
-                    pack.position.z = -0.45;
-                    pack.position.y = 0.2;
-                    backpackGroup.add(pack);
-                    player = backpackGroup;
+                    salesGroup.add(body);
+                    const briefcaseGeometry = new THREE.BoxGeometry(0.6, 0.4, 0.2);
+                    const briefcaseMaterial = new THREE.MeshLambertMaterial({ color: 0xd35400 });
+                    const briefcase = new THREE.Mesh(briefcaseGeometry, briefcaseMaterial);
+                    briefcase.position.x = 0.7;
+                    briefcase.position.y = -0.2;
+                    salesGroup.add(briefcase);
+                    player = salesGroup;
                     break;
                     
-                case 2: // Strategist ⚔️ - Sword-like tall shape
+                case 2: // Project Manager
                     playerGeometry = new THREE.CylinderGeometry(0.3, 0.3, 2.5, 8);
                     playerMaterial = new THREE.MeshLambertMaterial({ color: 0x8e44ad });
                     break;
                     
-                case 3: // Wise Keeper 🧙‍♂️ - Wizard hat shape
-                    const wizardGroup = new THREE.Group();
-                    // Base (robe)
+                case 3: // Senior Consultant
+                    const consultantGroup = new THREE.Group();
                     const robeGeometry = new THREE.CylinderGeometry(0.8, 0.4, 1.5, 8);
                     const robeMaterial = new THREE.MeshLambertMaterial({ color: 0x27ae60 });
                     const robe = new THREE.Mesh(robeGeometry, robeMaterial);
-                    wizardGroup.add(robe);
-                    // Hat
-                    const hatGeometry = new THREE.ConeGeometry(0.5, 1.2, 8);
-                    const hatMaterial = new THREE.MeshLambertMaterial({ color: 0x1e8449 });
-                    const hat = new THREE.Mesh(hatGeometry, hatMaterial);
-                    hat.position.y = 1.35;
-                    wizardGroup.add(hat);
-                    player = wizardGroup;
+                    consultantGroup.add(robe);
+                    const briefcaseTopGeometry = new THREE.BoxGeometry(0.4, 0.3, 0.1);
+                    const briefcaseTopMaterial = new THREE.MeshLambertMaterial({ color: 0x1e8449 });
+                    const briefcaseTop = new THREE.Mesh(briefcaseTopGeometry, briefcaseTopMaterial);
+                    briefcaseTop.position.y = 1.2;
+                    briefcaseTop.position.x = 0.5;
+                    consultantGroup.add(briefcaseTop);
+                    player = consultantGroup;
                     break;
                     
-                case 4: // Cheerful Creator 🎨 - Artistic palette shape
-                    const artistGroup = new THREE.Group();
-                    // Main body
-                    const artistBodyGeometry = new THREE.SphereGeometry(0.6, 8, 6);
-                    const artistBodyMaterial = new THREE.MeshLambertMaterial({ color: 0xe74c3c });
-                    const artistBody = new THREE.Mesh(artistBodyGeometry, artistBodyMaterial);
-                    artistGroup.add(artistBody);
-                    // Palette attachment
-                    const paletteGeometry = new THREE.BoxGeometry(0.4, 0.4, 0.1);
-                    const paletteMaterial = new THREE.MeshLambertMaterial({ color: 0xf39c12 });
-                    const palette = new THREE.Mesh(paletteGeometry, paletteMaterial);
-                    palette.position.x = 0.7;
-                    palette.position.y = 0.2;
-                    artistGroup.add(palette);
-                    player = artistGroup;
+                case 4: // Creative Director
+                    const creativeGroup = new THREE.Group();
+                    const creativeBodyGeometry = new THREE.SphereGeometry(0.6, 8, 6);
+                    const creativeBodyMaterial = new THREE.MeshLambertMaterial({ color: 0xe74c3c });
+                    const creativeBody = new THREE.Mesh(creativeBodyGeometry, creativeBodyMaterial);
+                    creativeGroup.add(creativeBody);
+                    const tabletGeometry = new THREE.BoxGeometry(0.3, 0.4, 0.05);
+                    const tabletMaterial = new THREE.MeshLambertMaterial({ color: 0xf39c12 });
+                    const tablet = new THREE.Mesh(tabletGeometry, tabletMaterial);
+                    tablet.position.x = 0.7;
+                    tablet.position.y = 0.2;
+                    creativeGroup.add(tablet);
+                    player = creativeGroup;
                     break;
                     
                 default:
@@ -402,15 +713,13 @@
                     break;
             }
             
-            // If not a group, create mesh from geometry
             if (!player) {
                 player = new THREE.Mesh(playerGeometry, playerMaterial);
             }
             
-            player.position.set(-20, 1, -20);
+            player.position.set(-23, 1, -23);
             player.castShadow = true;
             
-            // Make sure all children cast shadows for grouped objects
             if (player.isGroup) {
                 player.traverse((child) => {
                     if (child.isMesh) {
@@ -421,28 +730,50 @@
             
             scene.add(player);
             
-            // Camera follows player
-            camera.position.set(-20, 5, -15);
+            camera.position.set(-23, 5, -18);
             camera.lookAt(player.position);
         }
         
-        function createCrystals() {
-            const crystalPositions = [
+        function createDocuments() {
+            const documentPositions = [
                 [18, 18], [-18, 18], [18, -18], [-18, -18], [0, 0]
             ];
             
-            crystalPositions.forEach(pos => {
-                const crystalGeometry = new THREE.OctahedronGeometry(0.8);
-                const crystalMaterial = new THREE.MeshLambertMaterial({ 
-                    color: 0xFF69B4,
-                    transparent: true,
-                    opacity: 0.8
+            documentPositions.forEach((pos, index) => {
+                const documentGroup = new THREE.Group();
+                
+                // Paper stack
+                const paperGeometry = new THREE.BoxGeometry(0.6, 0.1, 0.8);
+                const paperMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
+                const paper = new THREE.Mesh(paperGeometry, paperMaterial);
+                documentGroup.add(paper);
+                
+                // Red urgent stamp
+                const stampGeometry = new THREE.BoxGeometry(0.3, 0.02, 0.3);
+                const stampMaterial = new THREE.MeshLambertMaterial({ color: 0xe74c3c });
+                const stamp = new THREE.Mesh(stampGeometry, stampMaterial);
+                stamp.position.y = 0.06;
+                documentGroup.add(stamp);
+                
+                // Paper clip
+                const clipGeometry = new THREE.BoxGeometry(0.1, 0.02, 0.2);
+                const clipMaterial = new THREE.MeshLambertMaterial({ color: 0x95a5a6 });
+                const clip = new THREE.Mesh(clipGeometry, clipMaterial);
+                clip.position.y = 0.08;
+                clip.position.x = 0.2;
+                documentGroup.add(clip);
+                
+                documentGroup.position.set(pos[0], 1.5, pos[1]);
+                documentGroup.castShadow = true;
+                
+                documentGroup.traverse((child) => {
+                    if (child.isMesh) {
+                        child.castShadow = true;
+                    }
                 });
-                const crystal = new THREE.Mesh(crystalGeometry, crystalMaterial);
-                crystal.position.set(pos[0], 1.5, pos[1]);
-                crystal.castShadow = true;
-                crystals.push(crystal);
-                scene.add(crystal);
+                
+                documents.push(documentGroup);
+                scene.add(documentGroup);
             });
         }
         
@@ -488,23 +819,10 @@
                         break;
                 }
             });
-            
-            // Mouse controls for camera rotation
-            let mouseX = 0, mouseY = 0;
-            let isMouseDown = false;
-            
-            document.addEventListener('mousedown', () => isMouseDown = true);
-            document.addEventListener('mouseup', () => isMouseDown = false);
-            document.addEventListener('mousemove', (event) => {
-                if (isMouseDown) {
-                    mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-                    mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-                }
-            });
         }
         
         function updatePlayer() {
-            if (gameWon) return;
+            if (gameWon || gameLost) return;
             
             const speed = 0.15;
             const newPosition = player.position.clone();
@@ -514,16 +832,16 @@
             if (moveState.left) newPosition.x -= speed;
             if (moveState.right) newPosition.x += speed;
             
-            // Wall collision detection
+            // Collision detection with office desks
             let collision = false;
-            walls.forEach(wall => {
-                const distance = newPosition.distanceTo(wall.position);
-                if (distance < 2) {
+            obstacles.forEach(obstacle => {
+                const distance = newPosition.distanceTo(obstacle.position);
+                if (distance < 2.5) {
                     collision = true;
                 }
             });
             
-            // Map boundaries
+            // Office boundaries
             if (newPosition.x > 24 || newPosition.x < -24 || 
                 newPosition.z > 24 || newPosition.z < -24) {
                 collision = true;
@@ -538,31 +856,31 @@
                 camera.lookAt(player.position);
             }
             
-            // Player rotation - different for different avatars
+            // Player animations based on avatar
             switch(selectedAvatar) {
-                case 0: // Lone Wolf - subtle rotation
+                case 0: // Night Shift Manager
                     player.rotation.y += 0.01;
                     break;
-                case 1: // Adventure Seeker - bouncy movement
+                case 1: // Field Sales Rep
                     player.rotation.y += 0.02;
-                    if (player.children.length > 0) {
-                        player.children[1].rotation.z = Math.sin(Date.now() * 0.005) * 0.1; // Backpack sway
+                    if (player.children.length > 1) {
+                        player.children[1].rotation.z = Math.sin(Date.now() * 0.005) * 0.1;
                     }
                     break;
-                case 2: // Strategist - steady rotation
+                case 2: // Project Manager
                     player.rotation.y += 0.015;
                     break;
-                case 3: // Wise Keeper - mystical float
+                case 3: // Senior Consultant
                     player.rotation.y += 0.008;
                     player.position.y = 1 + Math.sin(Date.now() * 0.003) * 0.1;
                     if (player.children.length > 1) {
-                        player.children[1].rotation.y += 0.03; // Hat rotation
+                        player.children[1].rotation.y += 0.03;
                     }
                     break;
-                case 4: // Cheerful Creator - artistic spin
+                case 4: // Creative Director
                     player.rotation.y += 0.025;
                     if (player.children.length > 1) {
-                        player.children[1].rotation.z = Math.sin(Date.now() * 0.004) * 0.2; // Palette wave
+                        player.children[1].rotation.z = Math.sin(Date.now() * 0.004) * 0.2;
                     }
                     break;
                 default:
@@ -571,68 +889,93 @@
             }
         }
         
-        function checkCrystalCollection() {
-            crystals.forEach((crystal, index) => {
-                if (crystal.visible) {
-                    const distance = player.position.distanceTo(crystal.position);
+        function checkDocumentCollection() {
+            documents.forEach((document, index) => {
+                if (document.visible) {
+                    const distance = player.position.distanceTo(document.position);
                     if (distance < 2) {
-                        crystal.visible = false;
+                        document.visible = false;
                         score++;
                         document.getElementById('score').textContent = score;
                         
                         if (score >= 5) {
-                            winGame();
+                            endGame(true);
                         }
                     }
                 }
             });
         }
         
-        function updateCrystals() {
-            crystals.forEach(crystal => {
-                if (crystal.visible) {
-                    crystal.rotation.y += 0.05;
-                    crystal.position.y = 1.5 + Math.sin(Date.now() * 0.002) * 0.3;
+        function updateDocuments() {
+            documents.forEach(document => {
+                if (document.visible) {
+                    document.rotation.y += 0.03;
+                    document.position.y = 1.5 + Math.sin(Date.now() * 0.002) * 0.1;
+                    
+                    // Animate the stamp
+                    if (document.children[1]) {
+                        document.children[1].rotation.z = Math.sin(Date.now() * 0.005) * 0.1;
+                    }
                 }
             });
         }
         
-        function updateUI() {
-            if (!gameWon) {
-                const currentTime = Math.floor((Date.now() - startTime) / 1000);
-                document.getElementById('time').textContent = currentTime;
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            if (gameStarted && !gameWon && !gameLost) {
+                updatePlayer();
+                checkDocumentCollection();
+                updateDocuments();
+            }
+            
+            // Update puzzle timer
+            if (puzzleStartTime && !puzzleSolved && !puzzleSkipped) {
+                updatePuzzleInfo();
+            }
+            
+            if (renderer && scene && camera) {
+                renderer.render(scene, camera);
             }
         }
         
-        function winGame() {
-            gameWon = true;
-            const finalTime = Math.floor((Date.now() - startTime) / 1000);
-            document.getElementById('finalTime').textContent = finalTime;
-            document.getElementById('winMessage').style.display = 'block';
-        }
-        
         function restartGame() {
-            // Reset game
+            // Reset all game states
             score = 0;
             gameWon = false;
-            startTime = Date.now();
+            gameLost = false;
+            gameStarted = false;
+            selectedAvatar = null;
+            timeLeft = timeLimit;
             
-            document.getElementById('score').textContent = '0';
-            document.getElementById('time').textContent = '0';
+            // Reset puzzle states
+            puzzleStartTime = null;
+            puzzleEndTime = null;
+            puzzleSolved = false;
+            puzzleMoves = 0;
+            puzzleSkipped = false;
+            puzzleState = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+            
+            // Clear timer
+            if (gameTimer) {
+                clearInterval(gameTimer);
+            }
+            
+            // Hide result screens
             document.getElementById('winMessage').style.display = 'none';
-            
-            // Show avatar selection screen again
-            document.getElementById('avatarSelection').style.display = 'flex';
+            document.getElementById('gameOverMessage').style.display = 'none';
             document.getElementById('ui').style.display = 'none';
             document.getElementById('controls').style.display = 'none';
+            document.getElementById('puzzleScreen').style.display = 'none';
             
-            // Reset avatar selection
-            selectedAvatar = null;
-            gameStarted = false;
+            // Show avatar selection
+            document.getElementById('avatarSelection').style.display = 'flex';
+            
+            // Reset avatar selection UI
             document.querySelectorAll('.avatar-card').forEach(c => c.classList.remove('selected'));
             document.getElementById('startButton').classList.remove('enabled');
             
-            // Clear scene if it exists
+            // Clear 3D scene
             if (scene) {
                 while(scene.children.length > 0) {
                     scene.remove(scene.children[0]);
@@ -643,19 +986,8 @@
             }
             
             // Reset arrays
-            crystals = [];
-            walls = [];
-        }
-        
-        function animate() {
-            requestAnimationFrame(animate);
-            
-            updatePlayer();
-            checkCrystalCollection();
-            updateCrystals();
-            updateUI();
-            
-            renderer.render(scene, camera);
+            documents = [];
+            obstacles = [];
         }
         
         // Window resize handler
@@ -667,8 +999,8 @@
             }
         });
         
-        // Don't start game automatically - wait for avatar selection
-        // initGame(); - removed
+        // Start animation loop immediately for puzzle
+        animate();
     </script>
 </body>
 </html>
