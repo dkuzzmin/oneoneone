@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Labyrinth of Choices</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      color: white;
+    }
+
+    #avatarSelection {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 100;
+      text-align: center;
+    }
+
+    #avatarSelection h1 {
+      color: white;
+      font-size: 3em;
+      margin-bottom: 20px;
+      text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+    }
+
+    .avatar-grid {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .avatar-card {
+      background: rgba(255,255,255,0.1);
+      border-radius: 15px;
+      padding: 20px;
+      width: 120px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.3s;
+    }
+
+    .avatar-card:hover {
+      background: rgba(74,158,255,0.3);
+      transform: translateY(-5px);
+    }
+
+    .avatar-emoji {
+      font-size: 3em;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .avatar-name {
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+
+    #ui {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: white;
+      font-family: Arial, sans-serif;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    #controls {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      color: white;
+      font-size: 14px;
+      pointer-events: none;
+    }
+
+    #pathChoice, #helperInteraction, #resourceChallenge, #gameResults, #gameOverMessage, #winMessage {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      z-index: 90;
+    }
+
+    #pathChoice h2, #helperInteraction h2, #resourceChallenge h2 {
+      color: #ffd700;
+      font-size: 2em;
+    }
+
+    .path-option, .helper-option, .resource-option {
+      margin: 15px;
+      padding: 15px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      max-width: 300px;
+    }
+
+    .path-option:hover, .helper-option:hover, .resource-option:hover {
+      background: rgba(74,158,255,0.3);
+      transform: translateY(-3px);
+    }
+
+    .results-section {
+      margin: 20px 0;
+      text-align: left;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .btn-restart {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #4CAF50;
+      border: none;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .btn-restart:hover {
+      background: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <!-- Avatar Selection -->
+  <div id="avatarSelection">
+    <h1>The Labyrinth of Choices</h1>
+    <p>Choose your avatar and shape your destiny.</p>
+    <div class="avatar-grid">
+      <div class="avatar-card" data-avatar="1">
+        <span class="avatar-emoji">⚔️</span>
+        <div class="avatar-name">The Warrior</div>
+      </div>
+      <div class="avatar-card" data-avatar="2">
+        <span class="avatar-emoji">🛡️</span>
+        <div class="avatar-name">The Guardian</div>
+      </div>
+      <div class="avatar-card" data-avatar="3">
+        <span class="avatar-emoji">🧙</span>
+        <div class="avatar-name">The Sage</div>
+      </div>
+      <div class="avatar-card" data-avatar="4">
+        <span class="avatar-emoji">🎯</span>
+        <div class="avatar-name">The Strategist</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game UI -->
+  <div id="ui" style="display:none;">
+    <div>Score: <span id="score">0</span></div>
+    <div>Crystals: <span id="crystals">0</span></div>
+    <div>Time: <span id="time">60</span>s</div>
+  </div>
+
+  <!-- Controls Help -->
+  <div id="controls" style="display:none;">
+    WASD or Arrow Keys to move | Space to interact
+  </div>
+
+  <!-- Path Choice Modal -->
+  <div id="pathChoice">
+    <h2>Choose Your Path</h2>
+    <p>Two paths lie ahead. Choose wisely...</p>
+    <div class="path-option" onclick="choosePath('safe')">
+      <strong>🛡️ Safe Path</strong><br>
+      Fewer risks, fewer rewards.
+    </div>
+    <div class="path-option" onclick="choosePath('risky')">
+      <strong>⚔️ Risky Path</strong><br>
+      Dangerous, but greater gains.
+    </div>
+  </div>
+
+  <!-- Helper Interaction -->
+  <div id="helperInteraction">
+    <h2>Seek Help?</h2>
+    <p>A mysterious guide offers assistance. Will you accept?</p>
+    <div class="helper-option" onclick="helpAccepted(true)">
+      <strong>✅ Yes, help me</strong>
+    </div>
+    <div class="helper-option" onclick="helpAccepted(false)">
+      <strong>❌ No, I go alone</strong>
+    </div>
+  </div>
+
+  <!-- Resource Challenge -->
+  <div id="resourceChallenge">
+    <h2>Resource Challenge</h2>
+    <p>Time is running out! Collect orbs before time expires.</p>
+    <div id="challengeTimer">20</div>
+    <div class="resource-option" onclick="submitResourceChoice('strategic')">
+      <strong>🧠 Strategic: Plan carefully</strong>
+    </div>
+    <div class="resource-option" onclick="submitResourceChoice('impulsive')">
+      <strong>⚡ Impulsive: Grab fast!</strong>
+    </div>
+  </div>
+
+  <!-- Game Results -->
+  <div id="gameResults">
+    <h2>Your Journey Complete</h2>
+    <div class="results-section" id="resultsSummary"></div>
+    <button class="btn-restart" onclick="restartGame()">Play Again</button>
+  </div>
+
+  <!-- Game Over / Win Messages -->
+  <div id="gameOverMessage">
+    <h2>Time's Up!</h2>
+    <div class="results-section" id="gameOverResults"></div>
+    <button class="btn-restart" onclick="restartGame()">Try Again</button>
+  </div>
+
+  <div id="winMessage">
+    <h2>Congratulations!</h2>
+    <div class="results-section" id="winResults"></div>
+    <button class="btn-restart" onclick="restartGame()">Play Again</button>
+  </div>
+
+  <!-- Three.js Canvas will be added here by JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    let scene, camera, renderer, player;
+    let moveState = { forward: false, backward: false, left: false, right: false };
+    let score = 0, crystals = 0;
+    let gameStartTime = Date.now();
+    let timeLimit = 60; // seconds
+    let gameStarted = false;
+    let selectedAvatar = null;
+    let timeLeft = timeLimit;
+    let isInResourceChallenge = false;
+    let waitingOrbs = 0;
+    let behaviorData = {
+      safeChoices: 0,
+      riskyChoices: 0,
+      helpRequests: 0,
+      independentChoices: 0,
+      strategicMoves: 0,
+      impulsiveMoves: 0,
+      totalMoves: 0
+    };
+
+    // DOM Elements
+    const ui = document.getElementById('ui');
+    const controls = document.getElementById('controls');
+    const pathChoice = document.getElementById('pathChoice');
+    const helperInteraction = document.getElementById('helperInteraction');
+    const resourceChallenge = document.getElementById('resourceChallenge');
+    const avatarSelection = document.getElementById('avatarSelection');
+
+    // Avatar Selection
+    document.querySelectorAll('.avatar-card').forEach(card => {
+      card.addEventListener('click', () => {
+        selectedAvatar = card.getAttribute('data-avatar');
+        avatarSelection.style.display = 'none';
+        init();
+        animate();
+      });
+    });
+
+    function init() {
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x0a0a0a);
+      scene.fog = new THREE.Fog(0x0a0a0a, 10, 50);
+
+      camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.set(0, 2, 5);
+
+      renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.shadowMap.enabled = true;
+      document.body.appendChild(renderer.domElement);
+
+      createPlayer();
+      createLabyrinth();
+      createFogOfWar();
+
+      // Start UI
+      ui.style.display = 'block';
+      controls.style.display = 'block';
+
+      gameStarted = true;
+      gameStartTime = Date.now();
+
+      // Start game loop
+      updateTimer();
+      requestAnimationFrame(animate);
+
+      setupControls();
+    }
+
+    function createPlayer() {
+      const geometry = new THREE.BoxGeometry(1, 1.8, 1);
+      let color;
+      switch(selectedAvatar) {
+        case "1": color = 0xff3b30; break; // Warrior
+        case "2": color = 0x34c759; break; // Guardian
+        case "3": color = 0x34aadc; break; // Sage
+        case "4": color = 0xffcc00; break; // Strategist
+      }
+      const material = new THREE.MeshLambertMaterial({ color });
+      player = new THREE.Mesh(geometry, material);
+      player.position.set(0, 0.9, 0);
+      player.castShadow = true;
+      scene.add(player);
+    }
+
+    function createLabyrinth() {
+      // Floor
+      const floorGeometry = new THREE.PlaneGeometry(50, 50);
+      const floorMaterial = new THREE.MeshLambertMaterial({ color: 0x1e1e1e });
+      const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+      floor.rotation.x = -Math.PI / 2;
+      floor.receiveShadow = true;
+      scene.add(floor);
+
+      // Walls
+      const wallMaterial = new THREE.MeshLambertMaterial({ color: 0x555555 });
+      const maze = [
+        [1,1,1,1,1,1,1,1,1,1],
+        [1,0,0,0,1,0,0,0,0,1],
+        [1,0,1,0,1,0,1,1,0,1],
+        [1,0,1,0,0,0,0,1,0,1],
+        [1,0,1,1,1,1,0,1,0,1],
+        [1,0,0,0,0,0,0,0,0,1],
+        [1,1,1,1,1,1,1,1,0,1],
+        [1,0,0,0,0,0,0,0,0,1],
+        [1,0,1,1,1,1,1,1,1,1],
+        [1,0,0,0,0,0,0,0,0,1],
+        [1,1,1,1,1,1,1,1,1,1]
+      ];
+
+      for (let i = 0; i < maze.length; i++) {
+        for (let j = 0; j < maze[i].length; j++) {
+          if (maze[i][j] === 1) {
+            const wall = new THREE.Mesh(
+              new THREE.BoxGeometry(1, 2, 1),
+              wallMaterial
+            );
+            wall.position.set(j - 5, 1, i - 5);
+            wall.castShadow = true;
+            wall.receiveShadow = true;
+            scene.add(wall);
+          }
+        }
+      }
+
+      // Crystals
+      for (let i = 0; i < 8; i++) {
+        const crystalGeometry = new THREE.TetrahedronGeometry(0.5);
+        const crystalMaterial = new THREE.MeshLambertMaterial({ color: 0x00ffff, emissive: 0x004444 });
+        const crystal = new THREE.Mesh(crystalGeometry, crystalMaterial);
+        crystal.position.set(
+          (Math.random() - 0.5) * 20,
+          1,
+          (Math.random() - 0.5) * 20
+        );
+        crystal.userData = { value: 10 };
+        crystal.castShadow = true;
+        scene.add(crystal);
+      }
+
+      // Path choices
+      createPathChoices();
+
+      // Helpers
+      createHelpers();
+
+      // Challenge area
+      createResourceChallengeArea();
+    }
+
+    function createPathChoices() {
+      const choicePositions = [
+        { pos: [-15, 15], id: 0 },
+        { pos: [15, -15], id: 1 }
+      ];
+
+      choicePositions.forEach((choice, i) => {
+        const group = new THREE.Group();
+        group.position.set(choice.pos[0], 1, choice.pos[1]);
+        group.userData = { type: 'pathChoice', id: i };
+
+        const base = new THREE.Mesh(
+          new THREE.CylinderGeometry(2, 2, 0.5, 8),
+          new THREE.MeshLambertMaterial({ color: 0x555555 })
+        );
+        base.position.y = 0.25;
+        group.add(base);
+
+        const sign = new THREE.Mesh(
+          new THREE.PlaneGeometry(2, 1),
+          new THREE.MeshLambertMaterial({ color: 0x000000, side: THREE.DoubleSide })
+        );
+        sign.position.set(0, 1.5, 0);
+        group.add(sign);
+
+        scene.add(group);
+      });
+    }
+
+    function createHelpers() {
+      const helperPositions = [
+        [-25, 0], [25, 5], [0, -25]
+      ];
+
+      const helperGeometry = new THREE.ConeGeometry(0.5, 1.5, 8);
+      const helperMaterial = new THREE.MeshLambertMaterial({
+        color: 0x9775fa,
+        emissive: 0x221144
+      });
+
+      helperPositions.forEach(pos => {
+        const helper = new THREE.Mesh(helperGeometry, helperMaterial);
+        helper.position.set(pos[0], 0.75, pos[1]);
+        helper.rotation.x = Math.PI / 2;
+        helper.userData = { type: 'helper' };
+        helper.castShadow = true;
+        scene.add(helper);
+      });
+    }
+
+    function createResourceChallengeArea() {
+      const challengeArea = new THREE.Mesh(
+        new THREE.CircleGeometry(3, 32),
+        new THREE.MeshLambertMaterial({ color: 0xff4d4d, emissive: 0x440000 })
+      );
+      challengeArea.position.set(0, 0, -20);
+      challengeArea.rotation.x = -Math.PI / 2;
+      challengeArea.userData = { type: 'challengeArea' };
+      scene.add(challengeArea);
+    }
+
+    function createFogOfWar() {
+      const fogGeometry = new THREE.PlaneGeometry(100, 100);
+      const fogMaterial = new THREE.MeshBasicMaterial({
+        color: 0x000000,
+        transparent: true,
+        opacity: 0.8
+      });
+      const fog = new THREE.Mesh(fogGeometry, fogMaterial);
+      fog.position.y = 10;
+      fog.rotation.x = -Math.PI / 2;
+      scene.add(fog);
+    }
+
+    function setupControls() {
+      const onKeyDown = (e) => {
+        if (!gameStarted) return;
+        switch(e.key) {
+          case 'w': case 'W': case 'ArrowUp': moveState.forward = true; break;
+          case 's': case 'S': case 'ArrowDown': moveState.backward = true; break;
+          case 'a': case 'A': case 'ArrowLeft': moveState.left = true; break;
+          case 'd': case 'D': case 'ArrowRight': moveState.right = true; break;
+          case ' ': interact(); break;
+        }
+      };
+
+      const onKeyUp = (e) => {
+        switch(e.key) {
+          case 'w': case 'W': case 'ArrowUp': moveState.forward = false; break;
+          case 's': case 'S': case 'ArrowDown': moveState.backward = false; break;
+          case 'a': case 'A': case 'ArrowLeft': moveState.left = false; break;
+          case 'd': case 'D': case 'ArrowRight': moveState.right = false; break;
+        }
+      };
+
+      window.addEventListener('keydown', onKeyDown);
+      window.addEventListener('keyup', onKeyUp);
+    }
+
+    function interact() {
+      const forwardVec = new THREE.Vector3(0, 0, -1).applyQuaternion(player.quaternion);
+      const pos = player.position.clone().add(forwardVec.multiplyScalar(2));
+      const objects = scene.children.filter(obj => obj.userData.type);
+
+      for (const obj of objects) {
+        const dist = pos.distanceTo(obj.position);
+        if (dist < 3) {
+          if (obj.userData.type === 'pathChoice') {
+            pathChoice.style.display = 'flex';
+          } else if (obj.userData.type === 'helper') {
+            helperInteraction.style.display = 'flex';
+          } else if (obj.userData.type === 'challengeArea' && !isInResourceChallenge) {
+            startResourceChallenge();
+          }
+          break;
+        }
+      }
+    }
+
+    function choosePath(pathType) {
+      pathChoice.style.display = 'none';
+      if (pathType === 'risky') {
+        behaviorData.riskyChoices++;
+        createRiskyPath();
+      } else {
+        behaviorData.safeChoices++;
+        createSafePath();
+      }
+    }
+
+    function helpAccepted(accept) {
+      helperInteraction.style.display = 'none';
+      if (accept) {
+        behaviorData.helpRequests++;
+        score += 15;
+      } else {
+        behaviorData.independentChoices++;
+        score += 5;
+      }
+      updateScore();
+    }
+
+    function startResourceChallenge() {
+      isInResourceChallenge = true;
+      resourceChallenge.style.display = 'flex';
+      createChallengeCrystals();
+      let challengeTimeLeft = 20;
+      const timerDisplay = document.getElementById('challengeTimer');
+      const challengeTimer = setInterval(() => {
+        challengeTimeLeft--;
+        timerDisplay.textContent = challengeTimeLeft;
+        if (challengeTimeLeft <= 0) {
+          clearInterval(challengeTimer);
+          endResourceChallenge();
+        }
+      }, 1000);
+    }
+
+    function createChallengeCrystals() {
+      challengeCrystals = [];
+      for (let i = 0; i < 6; i++) {
+        const orb = new THREE.Mesh(
+          new THREE.SphereGeometry(0.3),
+          new THREE.MeshLambertMaterial({ color: 0xffd700, emissive: 0x443300 })
+        );
+        orb.position.set(
+          (Math.random() - 0.5) * 10,
+          1,
+          (Math.random() - 0.5) * 10 - 20
+        );
+        orb.userData = { collected: false };
+        orb.castShadow = true;
+        scene.add(orb);
+        challengeCrystals.push(orb);
+      }
+    }
+
+    function submitResourceChoice(choice) {
+      if (choice === 'strategic') {
+        behaviorData.strategicMoves++;
+        score += waitingOrbs * 10;
+      } else {
+        behaviorData.impulsiveMoves++;
+        score += waitingOrbs * 5;
+      }
+      endResourceChallenge();
+    }
+
+    function endResourceChallenge() {
+      isInResourceChallenge = false;
+      resourceChallenge.style.display = 'none';
+      document.getElementById('challengeTimer').textContent = '20';
+      if (challengeCrystals) {
+        challengeCrystals.forEach(orb => scene.remove(orb));
+      }
+      updateScore();
+    }
+
+    function createSafePath() {
+      for (let i = 0; i < 2; i++) {
+        const crystal = new THREE.Mesh(
+          new THREE.TetrahedronGeometry(0.4),
+          new THREE.MeshLambertMaterial({ color: 0x4CAF50, emissive: 0x082008 })
+        );
+        crystal.position.set(
+          (Math.random() - 0.5) * 10,
+          1,
+          (Math.random() - 0.5) * 10 + 15
+        );
+        crystal.userData = { value: 5 };
+        crystal.castShadow = true;
+        scene.add(crystal);
+      }
+    }
+
+    function createRiskyPath() {
+      for (let i = 0; i < 3; i++) {
+        const trap = new THREE.Mesh(
+          new THREE.BoxGeometry(2, 1, 2),
+          new THREE.MeshLambertMaterial({ color: 0xff3b30, emissive: 0x440000 })
+        );
+        trap.position.set(
+          (Math.random() - 0.5) * 10,
+          0.5,
+          (Math.random() - 0.5) * 10 + 15
+        );
+        trap.userData = { type: 'trap' };
+        trap.castShadow = true;
+        scene.add(trap);
+      }
+
+      for (let i = 0; i < 4; i++) {
+        const crystal = new THREE.Mesh(
+          new THREE.TetrahedronGeometry(0.5),
+          new THREE.MeshLambertMaterial({ color: 0xff9500, emissive: 0x442200 })
+        );
+        crystal.position.set(
+          (Math.random() - 0.5) * 10,
+          1,
+          (Math.random() - 0.5) * 10 + 15
+        );
+        crystal.userData = { value: 20 };
+        crystal.castShadow = true;
+        scene.add(crystal);
+      }
+    }
+
+    function updateScore() {
+      document.getElementById('score').textContent = score;
+      document.getElementById('crystals').textContent = crystals;
+    }
+
+    function updateTimer() {
+      if (!gameStarted) return;
+      const elapsed = Math.floor((Date.now() - gameStartTime) / 1000);
+      timeLeft = timeLimit - elapsed;
+      if (timeLeft <= 0) {
+        endGame(false);
+      } else {
+        document.getElementById('time').textContent = timeLeft;
+        requestAnimationFrame(() => updateTimer());
+      }
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      if (!gameStarted || !renderer) return;
+
+      const speed = 0.1;
+      const direction = new THREE.Vector3();
+
+      if (moveState.forward) direction.z -= speed;
+      if (moveState.backward) direction.z += speed;
+      if (moveState.left) direction.x -= speed;
+      if (moveState.right) direction.x += speed;
+
+      if (direction.length() > 0) {
+        direction.normalize().multiplyScalar(speed);
+        player.position.add(direction);
+        checkCollisions();
+        checkPickups();
+        behaviorData.totalMoves++;
+      }
+
+      renderer.render(scene, camera);
+    }
+
+    function checkCollisions() {
+      const playerBox = new THREE.Box3().setFromObject(player);
+      scene.children.forEach(obj => {
+        if (obj !== player && obj.geometry && obj.material && obj !== camera) {
+          const objBox = new THREE.Box3().setFromObject(obj);
+          if (playerBox.intersectsBox(objBox)) {
+            if (obj.userData.type === 'trap') {
+              score = Math.max(0, score - 10);
+              updateScore();
+              scene.remove(obj);
+            }
+          }
+        }
+      });
+    }
+
+    function checkPickups() {
+      const playerPos = player.position;
+      scene.children.forEach(obj => {
+        if (obj.userData && obj.userData.value && obj.visible) {
+          const distance = playerPos.distanceTo(obj.position);
+          if (distance < 2) {
+            obj.visible = false;
+            score += obj.userData.value;
+            crystals++;
+            updateScore();
+          }
+        }
+      });
+    }
+
+    function endGame(won) {
+      gameStarted = false;
+      ui.style.display = 'none';
+      controls.style.display = 'none';
+
+      const totalScore = score;
+      const efficiency = crystals > 0 ? (score / crystals).toFixed(1) : 0;
+      const results = `
+        <p><strong>Final Score:</strong> ${totalScore}</p>
+        <p><strong>Crystals Collected:</strong> ${crystals}</p>
+        <p><strong>Moves Made:</strong> ${behaviorData.totalMoves}</p>
+        <p><strong>Path Choices:</strong> Safe: ${behaviorData.safeChoices}, Risky: ${behaviorData.riskyChoices}</p>
+        <p><strong>Social Behavior:</strong> Helped: ${behaviorData.helpRequests}, Independent: ${behaviorData.independentChoices}</p>
+        <p><strong>Resource Strategy:</strong> Strategic: ${behaviorData.strategicMoves}, Impulsive: ${behaviorData.impulsiveMoves}</p>
+        <p><strong>Efficiency:</strong> ${efficiency} points per crystal</p>
+      `;
+
+      if (won) {
+        document.getElementById('winResults').innerHTML = results;
+        document.getElementById('winMessage').style.display = 'flex';
+      } else {
+        document.getElementById('gameOverResults').innerHTML = results;
+        document.getElementById('gameOverMessage').style.display = 'flex';
+      }
+    }
+
+    function restartGame() {
+      location.reload();
+    }
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>
