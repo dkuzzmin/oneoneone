@@ -1,0 +1,1517 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000; min-height: 14.0px}
+    span.s1 {font-kerning: none}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html lang="en"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"/&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;title&gt;The Labyrinth of Choices&lt;/title&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;style&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>body {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-family: Arial, sans-serif;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>overflow: hidden;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>#ui {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>top: 20px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>left: 20px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 18px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-shadow: 2px 2px 4px rgba(0,0,0,0.8);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>z-index: 100;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: rgba(0,0,0,0.3);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 15px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 10px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>backdrop-filter: blur(5px);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>#ui div {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-bottom: 5px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>#controls {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>bottom: 20px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>left: 50%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transform: translateX(-50%);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-align: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 14px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-shadow: 2px 2px 4px rgba(0,0,0,0.8);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: rgba(0,0,0,0.3);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 10px 20px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 20px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>#gameOverMessage, #winMessage {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>top: 50%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>left: 50%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transform: translate(-50%, -50%);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: rgba(0,0,0,0.95);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 30px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 15px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 18px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-align: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: none;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>z-index: 200;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>max-width: 600px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>backdrop-filter: blur(10px);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>#winMessage {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: rgba(0,100,0,0.95);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>#avatarSelection {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>top: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>left: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>width: 100%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>height: 100%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>flex-direction: column;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>justify-content: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>align-items: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>z-index: 1000;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>#avatarSelection h1 {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 3em;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-bottom: 20px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-shadow: 3px 3px 6px rgba(0,0,0,0.8);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-align: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>#avatarSelection p {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #bbb;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 1.2em;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-bottom: 40px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-align: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>max-width: 600px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>line-height: 1.6;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.avatar-grid {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: grid;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>gap: 20px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>max-width: 1000px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 20px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.avatar-card {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: rgba(255,255,255,0.1);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border: 2px solid transparent;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 15px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 20px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>cursor: pointer;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transition: all 0.3s ease;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>backdrop-filter: blur(10px);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-align: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.avatar-card:hover {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-color: #4a9eff;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transform: translateY(-5px);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>box-shadow: 0 10px 20px rgba(74,158,255,0.3);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.avatar-card.selected {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-color: #ff6b6b;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: rgba(255,107,107,0.2);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.avatar-emoji {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 4em;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-bottom: 15px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: block;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.avatar-name {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 1.3em;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-weight: bold;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.avatar-description {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 0.9em;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>opacity: 0.8;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>line-height: 1.4;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.start-button {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-top: 30px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 15px 40px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 1.2em;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: linear-gradient(45deg, #ff6b6b, #ee5a52);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border: none;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 25px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>cursor: pointer;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transition: all 0.3s ease;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>opacity: 0.5;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>pointer-events: none;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.start-button.enabled {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>opacity: 1;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>pointer-events: auto;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* Fixed selector: hover AFTER .enabled */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.start-button.enabled:hover {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transform: translateY(-2px);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>box-shadow: 0 5px 15px rgba(255,107,107,0.4);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>#pathChoice {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>top: 50%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>left: 50%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transform: translate(-50%, -50%);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: rgba(0,0,0,0.95);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 30px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 15px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-align: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: none;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>z-index: 300;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>max-width: 500px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>backdrop-filter: blur(10px);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.path-option {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin: 15px 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 15px 25px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border: 2px solid #4a9eff;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: rgba(74,158,255,0.1);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 10px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>cursor: pointer;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transition: all 0.3s ease;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.path-option:hover {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: rgba(74,158,255,0.3);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transform: translateY(-2px);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.path-option.risky {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-color: #ff6b6b;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: rgba(255,107,107,0.1);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.path-option.risky:hover {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: rgba(255,107,107,0.3);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>#helperInteraction {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>top: 50%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>left: 50%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transform: translate(-50%, -50%);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: rgba(0,0,0,0.95);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 30px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 15px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-align: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: none;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>z-index: 300;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>max-width: 400px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>backdrop-filter: blur(10px);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.helper-option {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin: 10px 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 12px 20px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border: 2px solid #4a9eff;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: rgba(74,158,255,0.1);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 8px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>cursor: pointer;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transition: all 0.3s ease;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.helper-option:hover {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: rgba(74,158,255,0.3);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transform: translateY(-2px);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>#resourceChallenge {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>top: 50%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>left: 50%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transform: translate(-50%, -50%);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: rgba(0,0,0,0.95);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 30px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 15px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-align: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: none;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>z-index: 300;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>max-width: 500px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>backdrop-filter: blur(10px);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>#challengeTimer {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 2em;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #ff6b6b;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin: 20px 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.results-section {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin: 15px 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 15px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: rgba(255,255,255,0.1);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 10px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-align: left;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.result-title {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-weight: bold;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #4a9eff;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-bottom: 8px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 1.1em;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.trait-analysis {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin: 5px 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 8px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: rgba(74,158,255,0.1);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 5px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 0.9em;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>button {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 12px 25px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 1em;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: linear-gradient(45deg, #4a9eff, #357abd);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border: none;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 8px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>cursor: pointer;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transition: all 0.3s ease;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin: 5px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>button:hover {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transform: translateY(-2px);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>box-shadow: 0 5px 15px rgba(74,158,255,0.4);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;body&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="avatarSelection"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h1&gt;The Labyrinth of Choices&lt;/h1&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p&gt;Enter a mysterious labyrinth where your decisions reveal hidden aspects of your personality. Navigate through challenges that test your patience, risk tolerance, independence, and strategic thinking.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="avatar-grid"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="avatar-card" data-avatar="0"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span class="avatar-emoji"&gt;🧭&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="avatar-name"&gt;The Explorer&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="avatar-description"&gt;Curious wanderer seeking new paths&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="avatar-card" data-avatar="1"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span class="avatar-emoji"&gt;⚡&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="avatar-name"&gt;The Sprinter&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="avatar-description"&gt;Fast-moving, action-oriented navigator&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="avatar-card" data-avatar="2"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span class="avatar-emoji"&gt;🛡️&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="avatar-name"&gt;The Guardian&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="avatar-description"&gt;Cautious protector, values safety&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="avatar-card" data-avatar="3"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span class="avatar-emoji"&gt;🧠&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="avatar-name"&gt;The Strategist&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="avatar-description"&gt;Analytical thinker, plans ahead&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="avatar-card" data-avatar="4"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span class="avatar-emoji"&gt;✨&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="avatar-name"&gt;The Mystic&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="avatar-description"&gt;Intuitive seeker of hidden treasures&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;button class="start-button" id="startButton" onclick="startGame()"&gt;Enter the Labyrinth&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="ui" style="display: none;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div&gt;Score: &lt;span id="score"&gt;0&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div&gt;Crystals: &lt;span id="crystals"&gt;0&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div&gt;Time: &lt;span id="timeLeft"&gt;300&lt;/span&gt;s&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div&gt;Avatar: &lt;span id="currentAvatar"&gt;&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div&gt;Orbs Waiting: &lt;span id="waitingOrbs"&gt;0&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="controls" style="display: none;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>WASD or Arrow Keys to move | Space: Interact | Navigate the labyrinth and make choices</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="pathChoice"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3&gt;Choose Your Path&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p&gt;Two paths lie ahead. Choose wisely...&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="path-option" onclick="choosePath('safe')"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;strong&gt;🛡️ Safe Path&lt;/strong&gt;&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>Longer route, no dangers, fewer rewards</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="path-option risky" onclick="choosePath('risky')"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;strong&gt;⚡ Risky Path&lt;/strong&gt;&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>Shorter route, moving traps, valuable crystals</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="helperInteraction"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3&gt;🤝 Helper Encountered&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p&gt;A wise guide offers assistance. What do you choose?&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="helper-option" onclick="helperChoice('help')"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>Ask for Help&lt;br&gt;&lt;small&gt;Get a hint about the area&lt;/small&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="helper-option" onclick="helperChoice('ignore')"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>Continue Alone&lt;br&gt;&lt;small&gt;Trust your own abilities&lt;/small&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="resourceChallenge" style="display: none;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3&gt;🏃‍♂️ Resource Challenge!&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p&gt;Limited time to collect crystals. Choose your strategy!&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div id="challengeTimer"&gt;20&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p&gt;Move quickly to collect as many crystals as possible before time runs out!&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="winMessage"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h2&gt;🎉 Labyrinth Conquered! 🎉&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div id="gameResults"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;button onclick="restartGame()"&gt;Enter New Labyrinth&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="gameOverMessage"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h2&gt;⏳ Time Expired ⏳&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div id="gameOverResults"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;button onclick="restartGame()"&gt;Try Again&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Global variables</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let scene, camera, renderer, player;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let moveState = { forward: false, backward: false, left: false, right: false };</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let score = 0, crystals = 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let gameStartTime = Date.now();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let gameWon = false, gameLost = false;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let selectedAvatar = null;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let gameStarted = false;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const timeLimit = 300; // 5 minutes</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let timeLeft = timeLimit;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let gameTimer;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Behavioral tracking</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let behaviorData = {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>impulsiveChoices: 0,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>patientChoices: 0,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>riskyChoices: 0,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>safeChoices: 0,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>helpRequests: 0,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>independentChoices: 0,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>strategicMoves: 0,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>impulsiveMoves: 0,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>orbsConsumed: 0,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>orbsEvolved: 0</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Fog of war</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let exploredCells = new Set();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let fogCells = [];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const CELL_SIZE = 4;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const VISION_RADIUS = 6;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Game objects</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let walls = [], orbs = [], helpers = [], pathChoices = [];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let currentPathChoice = null;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let currentHelper = null;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let isInResourceChallenge = false;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let challengeTimer = null;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let challengeCrystals = [];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Avatar data</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const avatars = [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ name: "The Explorer", color: 0x4a9eff, emoji: "🧭" },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ name: "The Sprinter", color: 0xff6b6b, emoji: "⚡" },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ name: "The Guardian", color: 0x51cf66, emoji: "🛡️" },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ name: "The Strategist", color: 0x9775fa, emoji: "🧠" },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ name: "The Mystic", color: 0xffd43b, emoji: "✨" }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Orb tracking</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let delayedOrbs = new Map(); // orbId -&gt; {timeCreated, position, evolved}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let waitingOrbs = 0;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Avatar selection handling</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>document.addEventListener('DOMContentLoaded', function() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const avatarCards = document.querySelectorAll('.avatar-card');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const startButton = document.getElementById('startButton');</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>avatarCards.forEach(card =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>card.addEventListener('click', function() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>avatarCards.forEach(c =&gt; c.classList.remove('selected'));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>this.classList.add('selected');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>selectedAvatar = parseInt(this.dataset.avatar, 10);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>startButton.classList.add('enabled');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function startGame() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (selectedAvatar === null) return;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Show/hide UI</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('avatarSelection').style.display = 'none';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('ui').style.display = 'block';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('controls').style.display = 'block';</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Init UI values</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>score = 0; crystals = 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>timeLeft = timeLimit;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('score').textContent = score;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('crystals').textContent = crystals;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('timeLeft').textContent = timeLeft;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('waitingOrbs').textContent = 0;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('currentAvatar').textContent =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>avatars[selectedAvatar].name + ' ' + avatars[selectedAvatar].emoji;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>gameStartTime = Date.now();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>gameStarted = true;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>initGame();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>startGameTimer();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function startGameTimer() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (gameTimer) clearInterval(gameTimer);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>gameTimer = setInterval(() =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>timeLeft--;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('timeLeft').textContent = timeLeft;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>updateDelayedOrbs();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (timeLeft &lt;= 0) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>endGame(false);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}, 1000);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function updateDelayedOrbs() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>let currentWaiting = 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const currentTime = Date.now();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>delayedOrbs.forEach((orbData, orbId) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (!orbData.evolved) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const timeWaited = (currentTime - orbData.timeCreated) / 1000;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (timeWaited &gt;= 30) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>// evolve orb group</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>const orbGroup = scene.getObjectByName(`orb_${orbId}`);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>if (orbGroup &amp;&amp; orbGroup.visible) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>evolveOrb(orbGroup, orbId);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>orbData.evolved = true;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>behaviorData.patientChoices++;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>behaviorData.orbsEvolved++;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>} else if (scene.getObjectByName(`orb_${orbId}`)?.visible) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>currentWaiting++;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>waitingOrbs = currentWaiting;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('waitingOrbs').textContent = waitingOrbs;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// FIXED: work with orb GROUP (THREE.Group), not mesh</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function evolveOrb(orb_group, orb_id) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// find the core mesh inside the group</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const core = orb_group.children.find(c =&gt; c.isMesh);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (core &amp;&amp; core.material) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>core.material.color.setHex(0xff6b6b);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (core.material.emissive) core.material.emissive.setHex(0x441111);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// scale the whole group</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>orb_group.scale.multiplyScalar(1.5);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// sparkles around the group</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const sparkles = [];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>for (let i = 0; i &lt; 8; i++) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const sparkle = new THREE.Mesh(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>new THREE.SphereGeometry(0.1, 4, 4),</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>new THREE.MeshLambertMaterial({ color: 0xffd700, emissive: 0x332200 })</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const angle = (i / 8) * Math.PI * 2;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>sparkle.position.set(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>orb_group.position.x + Math.cos(angle) * 2,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>orb_group.position.y + 0.5 + Math.sin(angle) * 0.5,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>orb_group.position.z + Math.sin(angle) * 2</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>sparkle.update = () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>sparkle.rotation.y += 0.1;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>sparkle.position.y += Math.sin(Date.now() * 0.01 + i) * 0.02;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>};</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>sparkles.push(sparkle);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>scene.add(sparkle);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>orb_group.sparkles = sparkles;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>orb_group.userData.evolved = true;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function endGame(won) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (gameTimer) clearInterval(gameTimer);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>gameWon = won;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>gameLost = !won;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (challengeTimer) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>clearInterval(challengeTimer);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>challengeTimer = null;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const gameTime = Math.floor((Date.now() - gameStartTime) / 1000);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const personalityAnalysis = analyzePersonality();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const results = `</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="results-section"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="result-title"&gt;Final Score:&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div&gt;Points: ${score} | Crystals: ${crystals}&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div&gt;Time: ${gameTime}s / ${timeLimit}s&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="results-section"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="result-title"&gt;Personality Analysis:&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>${personalityAnalysis}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="results-section"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="result-title"&gt;Behavioral Summary:&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div&gt;Impulsive vs Patient: ${behaviorData.impulsiveChoices}/${behaviorData.patientChoices}&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div&gt;Risk-taking vs Cautious: ${behaviorData.riskyChoices}/${behaviorData.safeChoices}&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div&gt;Independent vs Collaborative: ${behaviorData.independentChoices}/${behaviorData.helpRequests}&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div&gt;Orbs consumed/evolved: ${behaviorData.orbsConsumed}/${behaviorData.orbsEvolved}&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>`;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (won) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('gameResults').innerHTML = results;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('winMessage').style.display = 'block';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>} else {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('gameOverResults').innerHTML = results;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('gameOverMessage').style.display = 'block';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function analyzePersonality() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>let analysis = '';</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const patienceRatio = behaviorData.patientChoices / (behaviorData.patientChoices + behaviorData.impulsiveChoices + 1);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (patienceRatio &gt; 0.6) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>analysis += '&lt;div class="trait-analysis"&gt;🧘 &lt;strong&gt;Patient Strategist:&lt;/strong&gt; You demonstrate excellent self-control and long-term thinking.&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>} else if (patienceRatio &lt; 0.3) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>analysis += '&lt;div class="trait-analysis"&gt;⚡ &lt;strong&gt;Action-Oriented:&lt;/strong&gt; You prefer immediate results and quick decision-making.&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>} else {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>analysis += '&lt;div class="trait-analysis"&gt;⚖️ &lt;strong&gt;Balanced Decision Maker:&lt;/strong&gt; You adapt your approach based on the situation.&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const riskRatio = behaviorData.riskyChoices / (behaviorData.riskyChoices + behaviorData.safeChoices + 1);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (riskRatio &gt; 0.6) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>analysis += '&lt;div class="trait-analysis"&gt;🎲 &lt;strong&gt;Risk Taker:&lt;/strong&gt; You embrace challenges and seek high-reward opportunities.&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>} else if (riskRatio &lt; 0.3) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>analysis += '&lt;div class="trait-analysis"&gt;🛡️ &lt;strong&gt;Cautious Planner:&lt;/strong&gt; You prioritize safety and certainty in your choices.&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>} else {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>analysis += '&lt;div class="trait-analysis"&gt;🎯 &lt;strong&gt;Calculated Risk Taker:&lt;/strong&gt; You carefully weigh risks against rewards.&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const independenceRatio = behaviorData.independentChoices / (behaviorData.independentChoices + behaviorData.helpRequests + 1);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (independenceRatio &gt; 0.6) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>analysis += '&lt;div class="trait-analysis"&gt;🗻 &lt;strong&gt;Self-Reliant:&lt;/strong&gt; You prefer to handle challenges independently.&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>} else if (independenceRatio &lt; 0.3) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>analysis += '&lt;div class="trait-analysis"&gt;🤝 &lt;strong&gt;Collaborative:&lt;/strong&gt; You value input from others and aren\'t afraid to ask for help.&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>} else {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>analysis += '&lt;div class="trait-analysis"&gt;🌟 &lt;strong&gt;Adaptive Collaborator:&lt;/strong&gt; You know when to rely on yourself and when to seek support.&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>return analysis;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Scene setup</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function initGame() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>scene = new THREE.Scene();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>scene.background = new THREE.Color(0x0a0a0a);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>scene.fog = new THREE.Fog(0x0a0a0a, 10, 50);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>renderer = new THREE.WebGLRenderer({ antialias: true });</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>renderer.setSize(window.innerWidth, window.innerHeight);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2)); // sharper rendering</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>renderer.shadowMap.enabled = true;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>renderer.shadowMap.type = THREE.PCFSoftShadowMap;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.body.appendChild(renderer.domElement);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Atmospheric lighting</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const ambientLight = new THREE.AmbientLight(0x404060, 0.3);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>scene.add(ambientLight);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const mysticalLight = new THREE.DirectionalLight(0x4a9eff, 0.6);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>mysticalLight.position.set(20, 30, 10);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>mysticalLight.castShadow = true;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>mysticalLight.shadow.mapSize.width = 2048;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>mysticalLight.shadow.mapSize.height = 2048;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>scene.add(mysticalLight);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>createLabyrinth();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>createFogOfWar();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>createPlayer();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>setupControls();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>animate();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function createLabyrinth() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Floor</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const floorGeometry = new THREE.PlaneGeometry(200, 200);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const floorMaterial = new THREE.MeshLambertMaterial({</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>color: 0x1a1a2e,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>transparent: true,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>opacity: 0.8</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const floor = new THREE.Mesh(floorGeometry, floorMaterial);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>floor.rotation.x = -Math.PI / 2;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>floor.receiveShadow = true;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>scene.add(floor);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Maze</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>createMazeStructure();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Orbs (delayed reward)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>createDelayedOrbs();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Path choices</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>createPathChoices();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Helpers</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>createHelpers();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Challenge area</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>createResourceChallengeArea();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function createMazeStructure() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// 1 = wall, 0 = path</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const maze = [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[1,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[1,0,1,0,1,0,1,1,0,1,0,1,1,0,1,0,1,1,0,1],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[1,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,1],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[1,0,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,0,1,1],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,1],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,1,1,1],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[1,0,0,0,1,0,0,0,1,0,1,0,0,0,1,0,0,0,0,1],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[1,0,1,1,1,0,1,1,1,0,1,1,1,1,1,1,1,0,1,1],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,1],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,0,1,0,1,1],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[1,0,0,0,1,0,0,0,1,0,0,0,1,0,1,0,1,0,0,1],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[1,0,1,0,1,1,1,1,1,0,1,0,1,0,1,0,1,1,0,1],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[1,0,1,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>maze.forEach((row, z) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>row.forEach((cell, x) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (cell === 1) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>createWall(x * 4 - 40, z * 4 - 32);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function createWall(x, z) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const wallGeometry = new THREE.BoxGeometry(4, 6, 4);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const wallMaterial = new THREE.MeshLambertMaterial({</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>color: 0x2c3e50,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>transparent: true,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>opacity: 0.9</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const wall = new THREE.Mesh(wallGeometry, wallMaterial);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>wall.position.set(x, 3, z);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>wall.castShadow = true;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>wall.receiveShadow = true;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>walls.push(wall);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>scene.add(wall);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function createDelayedOrbs() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const orbPositions = [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[-20, -20], [20, -20], [0, 0], [-30, 10], [30, 10],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[-10, -30], [10, 30], [-35, -10], [35, -10]</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>orbPositions.forEach((pos, index) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const orbGroup = new THREE.Group();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>orbGroup.name = `orb_${index}`;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>// core</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const orbGeometry = new THREE.SphereGeometry(0.8, 12, 8);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const orbMaterial = new THREE.MeshLambertMaterial({</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>color: 0x4a9eff,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>emissive: 0x001144,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>transparent: true,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>opacity: 0.8</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const orbCore = new THREE.Mesh(orbGeometry, orbMaterial);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>orbGroup.add(orbCore);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>// glow shell</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const glowGeometry = new THREE.SphereGeometry(1.2, 12, 8);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const glowMaterial = new THREE.MeshLambertMaterial({</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>color: 0x4a9eff,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>transparent: true,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>opacity: 0.2</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const glow = new THREE.Mesh(glowGeometry, glowMaterial);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>orbGroup.add(glow);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>orbGroup.position.set(pos[0], 2, pos[1]);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>orbGroup.userData = { type: 'orb', id: index, timeValue: 10, crystalValue: 3 };</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>delayedOrbs.set(index, {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>timeCreated: Date.now(),</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>position: pos,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>evolved: false</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>orbs.push(orbGroup);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>scene.add(orbGroup);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function createPathChoices() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const choicePositions = [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{ pos: [-15, 15], id: 0 },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{ pos: [15, -15], id: 1 }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>choicePositions.forEach(choice =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const choiceGroup = new THREE.Group();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>choiceGroup.name = `pathChoice_${choice.id}`;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const indicatorGeometry = new THREE.CylinderGeometry(2, 2, 0.5);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const indicatorMaterial = new THREE.MeshLambertMaterial({</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>color: 0xffd43b,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>emissive: 0x332200</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const indicator = new THREE.Mesh(indicatorGeometry, indicatorMaterial);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>indicator.position.y = 0.25;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>choiceGroup.add(indicator);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>choiceGroup.position.set(choice.pos[0], 0, choice.pos[1]);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>choiceGroup.userData = { type: 'pathChoice', id: choice.id };</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>pathChoices.push(choiceGroup);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>scene.add(choiceGroup);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function createHelpers() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const helperPositions = [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[-25, 0], [25, 5], [0, -25]</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>helperPositions.forEach((pos, index) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const helperGroup = new THREE.Group();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>helperGroup.name = `helper_${index}`;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const helperGeometry = new THREE.ConeGeometry(0.8, 3, 8);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const helperMaterial = new THREE.MeshLambertMaterial({</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>color: 0x9775fa,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>emissive: 0x221144</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const helper = new THREE.Mesh(helperGeometry, helperMaterial);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>helper.position.y = 1.5;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>helperGroup.add(helper);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>// floating symbols</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>for (let i = 0; i &lt; 3; i++) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const symbolGeometry = new THREE.SphereGeometry(0.2, 6, 6);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const symbolMaterial = new THREE.MeshLambertMaterial({</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>color: 0xffd43b,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>emissive: 0x332200</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const symbol = new THREE.Mesh(symbolGeometry, symbolMaterial);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const angle = (i / 3) * Math.PI * 2;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>symbol.position.set(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>Math.cos(angle) * 2,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>3 + Math.sin(angle) * 0.5,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>Math.sin(angle) * 2</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>helperGroup.add(symbol);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>helperGroup.position.set(pos[0], 0, pos[1]);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>helperGroup.userData = { type: 'helper', id: index, used: false };</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>helpers.push(helperGroup);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>scene.add(helperGroup);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function createResourceChallengeArea() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const challengeArea = new THREE.Group();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>challengeArea.name = 'challengeArea';</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const areaGeometry = new THREE.CylinderGeometry(8, 8, 0.2);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const areaMaterial = new THREE.MeshLambertMaterial({</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>color: 0xff6b6b,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>emissive: 0x441111,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>transparent: true,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>opacity: 0.5</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const area = new THREE.Mesh(areaGeometry, areaMaterial);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>area.position.y = 0.1;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>challengeArea.add(area);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>challengeArea.position.set(35, 0, 30);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>challengeArea.userData = { type: 'challengeArea' };</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>scene.add(challengeArea);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function createFogOfWar() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>for (let x = -50; x &lt;= 50; x += CELL_SIZE) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>for (let z = -50; z &lt;= 50; z += CELL_SIZE) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const fogGeometry = new THREE.PlaneGeometry(CELL_SIZE, CELL_SIZE);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const fogMaterial = new THREE.MeshLambertMaterial({</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>color: 0x000000,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>transparent: true,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>opacity: 0.8</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const fog = new THREE.Mesh(fogGeometry, fogMaterial);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>fog.rotation.x = -Math.PI / 2;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>fog.position.set(x, 0.1, z);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>fog.userData = { fogCell: true, x, z };</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>fogCells.push(fog);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>scene.add(fog);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function updateFogOfWar() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const playerPos = player.position;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>fogCells.forEach(fog =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const dx = fog.userData.x - playerPos.x;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const dz = fog.userData.z - playerPos.z;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const distance = Math.sqrt(dx*dx + dz*dz);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (distance &lt;= VISION_RADIUS) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>fog.visible = false;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const cellKey = `${Math.floor(fog.userData.x / CELL_SIZE)}_${Math.floor(fog.userData.z / CELL_SIZE)}`;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>exploredCells.add(cellKey);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function createPlayer() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>let playerGeometry, playerMaterial;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>switch(selectedAvatar) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>case 0: // Explorer</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>playerGeometry = new THREE.ConeGeometry(0.6, 2.5, 8);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>playerMaterial = new THREE.MeshLambertMaterial({ color: 0x4a9eff });</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>break;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>case 1: // Sprinter</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>playerGeometry = new THREE.BoxGeometry(0.8, 2, 0.8);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>playerMaterial = new THREE.MeshLambertMaterial({ color: 0xff6b6b });</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>break;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>case 2: // Guardian</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>playerGeometry = new THREE.CylinderGeometry(0.6, 0.6, 2.5);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>playerMaterial = new THREE.MeshLambertMaterial({ color: 0x51cf66 });</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>break;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>case 3: // Strategist</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>playerGeometry = new THREE.OctahedronGeometry(1);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>playerMaterial = new THREE.MeshLambertMaterial({ color: 0x9775fa });</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>break;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>case 4: // Mystic</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>playerGeometry = new THREE.SphereGeometry(0.8, 12, 8);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>playerMaterial = new THREE.MeshLambertMaterial({</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>color: 0xffd43b,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>emissive: 0x332200</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>break;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>player = new THREE.Mesh(playerGeometry, playerMaterial);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>player.position.set(-38, 1.25, -30);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>player.castShadow = true;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>scene.add(player);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>camera.position.set(-38, 8, -25);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>camera.lookAt(player.position);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function setupControls() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.addEventListener('keydown', (event) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>switch(event.code) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>case 'KeyW':</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>case 'ArrowUp':</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>moveState.forward = true; break;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>case 'KeyS':</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>case 'ArrowDown':</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>moveState.backward = true; break;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>case 'KeyA':</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>case 'ArrowLeft':</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>moveState.left = true; break;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>case 'KeyD':</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>case 'ArrowRight':</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>moveState.right = true; break;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>case 'Space':</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>event.preventDefault();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>handleInteraction();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>break;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.addEventListener('keyup', (event) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>switch(event.code) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>case 'KeyW':</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>case 'ArrowUp':</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>moveState.forward = false; break;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>case 'KeyS':</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>case 'ArrowDown':</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>moveState.backward = false; break;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>case 'KeyA':</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>case 'ArrowLeft':</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>moveState.left = false; break;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>case 'KeyD':</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>case 'ArrowRight':</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>moveState.right = false; break;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function handleInteraction() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const playerPos = player.position;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Orbs</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>orbs.forEach(orb =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (orb.visible) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const distance = playerPos.distanceTo(orb.position);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (distance &lt; 3) collectOrb(orb);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Path choices</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>pathChoices.forEach(choice =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (choice.visible) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const distance = playerPos.distanceTo(choice.position);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (distance &lt; 4) showPathChoice(choice);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Helpers</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>helpers.forEach(helper =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (helper.visible &amp;&amp; !helper.userData.used) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const distance = playerPos.distanceTo(helper.position);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (distance &lt; 4) showHelperInteraction(helper);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Challenge area</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const challengeArea = scene.getObjectByName('challengeArea');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (challengeArea &amp;&amp; challengeArea.visible &amp;&amp; !isInResourceChallenge) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const distance = playerPos.distanceTo(challengeArea.position);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (distance &lt; 10) startResourceChallenge();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function collectOrb(orb) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const orbData = delayedOrbs.get(orb.userData.id);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (orbData &amp;&amp; !orbData.evolved) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>// immediate consumption — impulsive choice</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>timeLeft += orb.userData.timeValue;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('timeLeft').textContent = timeLeft;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>behaviorData.impulsiveChoices++;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>behaviorData.orbsConsumed++;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>} else if (orbData &amp;&amp; orbData.evolved) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>// evolved crystal — patient choice reward</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>score += orb.userData.crystalValue;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>crystals++;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('score').textContent = score;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('crystals').textContent = crystals;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>orb.visible = false;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (orb.sparkles) orb.sparkles.forEach(s =&gt; s.visible = false);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function showPathChoice(choice) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>currentPathChoice = choice;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('pathChoice').style.display = 'block';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function choosePath(pathType) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('pathChoice').style.display = 'none';</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (pathType === 'risky') {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>behaviorData.riskyChoices++;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>createRiskyPath();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>} else {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>behaviorData.safeChoices++;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>createSafePath();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (currentPathChoice) currentPathChoice.visible = false;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function createRiskyPath() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// moving traps + valuable crystals</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>for (let i = 0; i &lt; 3; i++) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const trap = new THREE.Mesh(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>new THREE.BoxGeometry(2, 1, 2),</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>new THREE.MeshLambertMaterial({ color: 0xff0000, emissive: 0x440000 })</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>trap.position.set(-10 + i * 5, 0.5, 20);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>trap.userData = { type: 'movingTrap', direction: 1 };</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>scene.add(trap);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const crystal = new THREE.Mesh(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>new THREE.OctahedronGeometry(0.8),</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>new THREE.MeshLambertMaterial({ color: 0x00ff00, emissive: 0x004400 })</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>crystal.position.set(-8 + i * 4, 2, 22);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>crystal.userData = { type: 'crystal', value: 5 };</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>scene.add(crystal);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function createSafePath() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// safe route with fewer rewards</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>for (let i = 0; i &lt; 2; i++) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const crystal = new THREE.Mesh(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>new THREE.SphereGeometry(0.5),</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>new THREE.MeshLambertMaterial({ color: 0x0088ff, emissive: 0x002244 })</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>crystal.position.set(-15 + i * 8, 2, 25);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>crystal.userData = { type: 'crystal', value: 2 };</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>scene.add(crystal);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function showHelperInteraction(helper) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>currentHelper = helper;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('helperInteraction').style.display = 'block';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function helperChoice(choice) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('helperInteraction').style.display = 'none';</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (choice === 'help') {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>behaviorData.helpRequests++;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>revealNearbyItems();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>} else {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>behaviorData.independentChoices++;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (currentHelper) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>currentHelper.userData.used = true;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>currentHelper.visible = false;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function revealNearbyItems() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// highlight nearby valuable items or evolved orbs</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>scene.traverse(child =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (!child.userData) return;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const isValuableCrystal = child.userData.type === 'crystal';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const isEvolvedOrb = (child.userData.type === 'orb') &amp;&amp;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>delayedOrbs.get(child.userData.id)?.evolved;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (isValuableCrystal || isEvolvedOrb) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const distance = player.position.distanceTo(child.position);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (distance &lt; 20) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>const highlight = new THREE.Mesh(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>new THREE.SphereGeometry(2, 8, 6),</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>new THREE.MeshLambertMaterial({</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>color: 0xffff00,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>transparent: true,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>opacity: 0.3,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>wireframe: true</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>})</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>highlight.position.copy(child.position);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>scene.add(highlight);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>setTimeout(() =&gt; scene.remove(highlight), 5000);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function startResourceChallenge() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>isInResourceChallenge = true;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('resourceChallenge').style.display = 'block';</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>createChallengeCrystals();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>let challengeTimeLeft = 20;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>challengeTimer = setInterval(() =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>challengeTimeLeft--;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('challengeTimer').textContent = challengeTimeLeft;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (challengeTimeLeft &lt;= 0) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>endResourceChallenge();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}, 1000);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function createChallengeCrystals() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>challengeCrystals = [];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// common crystals</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>for (let i = 0; i &lt; 8; i++) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const crystal = new THREE.Mesh(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>new THREE.SphereGeometry(0.4),</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>new THREE.MeshLambertMaterial({ color: 0x00aaff, emissive: 0x002244 })</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const angle = (i / 8) * Math.PI * 2;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>crystal.position.set(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>35 + Math.cos(angle) * 5,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>1,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>30 + Math.sin(angle) * 5</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>crystal.userData = { type: 'challengeCrystal', value: 1, rarity: 'common' };</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>challengeCrystals.push(crystal);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>scene.add(crystal);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// rare crystals + small hazards</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>for (let i = 0; i &lt; 4; i++) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const crystal = new THREE.Mesh(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>new THREE.OctahedronGeometry(0.8),</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>new THREE.MeshLambertMaterial({ color: 0xff0088, emissive: 0x440022 })</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const angle = (i / 4) * Math.PI * 2;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>crystal.position.set(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>35 + Math.cos(angle) * 12,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>1,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>30 + Math.sin(angle) * 12</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>crystal.userData = { type: 'challengeCrystal', value: 5, rarity: 'rare' };</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>challengeCrystals.push(crystal);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>scene.add(crystal);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const hazard = new THREE.Mesh(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>new THREE.CylinderGeometry(1, 1, 0.2),</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>new THREE.MeshLambertMaterial({ color: 0xff4444, emissive: 0x442222 })</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>hazard.position.set(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>crystal.position.x + Math.random() * 2 - 1,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>0.1,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>crystal.position.z + Math.random() * 2 - 1</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>hazard.userData = { type: 'mildHazard' };</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>scene.add(hazard);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function endResourceChallenge() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (challengeTimer) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>clearInterval(challengeTimer);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>challengeTimer = null;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>isInResourceChallenge = false;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('resourceChallenge').style.display = 'none';</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>analyzeResourceStrategy();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function analyzeResourceStrategy() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>let commonCollected = 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>let rareCollected = 0;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (challengeCrystals &amp;&amp; challengeCrystals.length &gt; 0) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>challengeCrystals.forEach(crystal =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (!crystal.visible) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>if (crystal.userData.rarity === 'common') commonCollected++;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>else if (crystal.userData.rarity === 'rare') rareCollected++;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (rareCollected &gt; commonCollected) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>behaviorData.strategicMoves += 2;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>} else if (commonCollected &gt; rareCollected * 2) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>behaviorData.impulsiveMoves += 2;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function updatePlayer() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (gameWon || gameLost) return;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const speed = selectedAvatar === 1 ? 0.2 : 0.15; // sprinter faster</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const newPosition = player.position.clone();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (moveState.forward) newPosition.z -= speed;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (moveState.backward) newPosition.z += speed;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (moveState.left) newPosition.x -= speed;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (moveState.right) newPosition.x += speed;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// walls collision (simple sphere check)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>let collision = false;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>walls.forEach(wall =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const distance = newPosition.distanceTo(wall.position);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (distance &lt; 2.5) collision = true;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// maze boundaries</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (newPosition.x &gt; 40 || newPosition.x &lt; -40 ||</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>newPosition.z &gt; 40 || newPosition.z &lt; -40) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>collision = true;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// optional interaction with moving traps: small time penalty</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>scene.traverse(child =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (child &amp;&amp; child.userData &amp;&amp; child.userData.type === 'movingTrap') {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (newPosition.distanceTo(child.position) &lt; 1.6) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>timeLeft = Math.max(0, timeLeft - 2);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>document.getElementById('timeLeft').textContent = timeLeft;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>collision = true;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (!collision) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>player.position.copy(newPosition);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>// camera follow</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>camera.position.x = player.position.x;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>camera.position.z = player.position.z + 7;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>camera.position.y = 8;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>camera.lookAt(player.position);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>// fog update</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>updateFogOfWar();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>// challenge collection</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (isInResourceChallenge) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>checkChallengeCrystalCollection();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// avatar-specific idle/move animations</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>switch(selectedAvatar) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>case 0: player.rotation.y += 0.01; break;<span class="Apple-converted-space">            </span>// Explorer</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>case 1: player.rotation.x = Math.sin(Date.now() * 0.01) * 0.1; break; // Sprinter</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>case 2: player.rotation.y += 0.005; break; <span class="Apple-converted-space">          </span>// Guardian</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>case 3:</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>player.rotation.y += 0.02;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>player.rotation.z = Math.sin(Date.now() * 0.003) * 0.1;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>break;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>case 4:</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>player.position.y = 1.25 + Math.sin(Date.now() * 0.005) * 0.2;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>player.rotation.y += 0.015;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>break;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// win condition</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (player.position.x &gt; 35 &amp;&amp; player.position.z &gt; 35) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>endGame(true);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function checkChallengeCrystalCollection() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (!challengeCrystals || challengeCrystals.length === 0) return;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>challengeCrystals.forEach(crystal =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (crystal.visible) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const distance = player.position.distanceTo(crystal.position);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (distance &lt; 2) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>crystal.visible = false;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>score += crystal.userData.value;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>crystals++;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>document.getElementById('score').textContent = score;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>document.getElementById('crystals').textContent = crystals;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function updateAnimations() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// orbs float &amp; spin</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (orbs &amp;&amp; orbs.length &gt; 0) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>orbs.forEach((orb, index) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (orb &amp;&amp; orb.visible) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>orb.rotation.y += 0.02;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>orb.position.y = 2 + Math.sin(Date.now() * 0.003 + index) * 0.3;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>if (orb.sparkles) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>orb.sparkles.forEach(sparkle =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>if (sparkle &amp;&amp; sparkle.update) sparkle.update();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// path choices oscillate</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (pathChoices &amp;&amp; pathChoices.length &gt; 0) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>pathChoices.forEach(choice =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (choice &amp;&amp; choice.visible) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>choice.rotation.y += 0.03;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>choice.position.y = Math.sin(Date.now() * 0.004) * 0.2;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// helpers float</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (helpers &amp;&amp; helpers.length &gt; 0) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>helpers.forEach((helper) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (helper &amp;&amp; helper.visible &amp;&amp; helper.children) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>helper.rotation.y += 0.01;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>helper.children.forEach((child, idx) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>if (child &amp;&amp; idx &gt; 0) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>child.position.y = 3 + Math.sin(Date.now() * 0.005 + idx) * 0.5;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>child.rotation.y += 0.02;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// moving traps</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (scene) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>scene.traverse(child =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (child &amp;&amp; child.userData &amp;&amp; child.userData.type === 'movingTrap') {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>child.position.x += child.userData.direction * 0.1;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>if (child.position.x &gt; 5 || child.position.x &lt; -15) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>child.userData.direction *= -1;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function animate() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>requestAnimationFrame(animate);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (gameStarted &amp;&amp; !gameWon &amp;&amp; !gameLost) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>updatePlayer();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>updateAnimations();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (renderer &amp;&amp; scene &amp;&amp; camera) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>renderer.render(scene, camera);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function restartGame() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// reset state</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>score = 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>crystals = 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>gameWon = false;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>gameLost = false;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>gameStarted = false;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>selectedAvatar = null;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>timeLeft = timeLimit;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>isInResourceChallenge = false;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>waitingOrbs = 0;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// reset behavior</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>behaviorData = {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>impulsiveChoices: 0,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>patientChoices: 0,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>riskyChoices: 0,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>safeChoices: 0,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>helpRequests: 0,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>independentChoices: 0,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>strategicMoves: 0,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>impulsiveMoves: 0,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>orbsConsumed: 0,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>orbsEvolved: 0</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// clear timers</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (gameTimer) clearInterval(gameTimer);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (challengeTimer) clearInterval(challengeTimer);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>challengeTimer = null;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// clear sets/maps</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>exploredCells.clear();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>delayedOrbs.clear();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// hide UI</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('winMessage').style.display = 'none';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('gameOverMessage').style.display = 'none';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('ui').style.display = 'none';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('controls').style.display = 'none';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('pathChoice').style.display = 'none';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('helperInteraction').style.display = 'none';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('resourceChallenge').style.display = 'none';</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// show avatar selection</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('avatarSelection').style.display = 'flex';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.querySelectorAll('.avatar-card').forEach(c =&gt; c.classList.remove('selected'));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('startButton').classList.remove('enabled');</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// clear 3D scene</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (scene) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>while (scene.children.length &gt; 0) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>scene.remove(scene.children[0]);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// dispose and remove renderer to avoid leaks</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (renderer) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>try { renderer.dispose &amp;&amp; renderer.dispose(); } catch(e) {}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (renderer.domElement &amp;&amp; renderer.domElement.parentNode) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>renderer.domElement.parentNode.removeChild(renderer.domElement);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>renderer = null;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// reset arrays</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>walls = [];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>orbs = [];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>helpers = [];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>pathChoices = [];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>fogCells = [];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>challengeCrystals = [];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Window resize handler</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>window.addEventListener('resize', () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (camera &amp;&amp; renderer) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>camera.aspect = window.innerWidth / window.innerHeight;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>camera.updateProjectionMatrix();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>renderer.setSize(window.innerWidth, window.innerHeight);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Start animation loop immediately (safe: render checks for renderer existence)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>requestAnimationFrame(animate);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+</body>
+</html>
